@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ydlab.interchoice.mapper.TutorMapper">
+  <resultMap id="BaseResultMap" type="com.ydlab.interchoice.domain.Tutor">
+    <id column="tutor_id" jdbcType="INTEGER" property="tutorId" />
+    <result column="tutor_name" jdbcType="VARCHAR" property="tutorName" />
+    <result column="research_direction" jdbcType="VARCHAR" property="researchDirection" />
+    <result column="tutor_title" jdbcType="VARCHAR" property="tutorTitle" />
+    <result column="student_requirement" jdbcType="INTEGER" property="studentRequirement" />
+    <result column=" educational_background" jdbcType="VARCHAR" property="educationalBackground" />
+    <result column="tutor_duty" jdbcType="VARCHAR" property="tutorDuty" />
+    <result column="tutor_sex" jdbcType="VARCHAR" property="tutorSex" />
+    <result column="tutor_age" jdbcType="INTEGER" property="tutorAge" />
+    <result column="favorate_character" jdbcType="VARCHAR" property="favorateCharacter" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    tutor_id, tutor_name, research_direction, tutor_title, student_requirement, ` educational_background`, 
+    tutor_duty, tutor_sex, tutor_age, favorate_character
+  </sql>
+  <select id="selectByExample" parameterType="com.ydlab.interchoice.domain.TutorExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tutor
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tutor
+    where tutor_id = #{tutorId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tutor
+    where tutor_id = #{tutorId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ydlab.interchoice.domain.TutorExample">
+    delete from tutor
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ydlab.interchoice.domain.Tutor">
+    insert into tutor (tutor_id, tutor_name, research_direction, 
+      tutor_title, student_requirement, ` educational_background`, 
+      tutor_duty, tutor_sex, tutor_age, 
+      favorate_character)
+    values (#{tutorId,jdbcType=INTEGER}, #{tutorName,jdbcType=VARCHAR}, #{researchDirection,jdbcType=VARCHAR}, 
+      #{tutorTitle,jdbcType=VARCHAR}, #{studentRequirement,jdbcType=INTEGER}, #{educationalBackground,jdbcType=VARCHAR}, 
+      #{tutorDuty,jdbcType=VARCHAR}, #{tutorSex,jdbcType=VARCHAR}, #{tutorAge,jdbcType=INTEGER}, 
+      #{favorateCharacter,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ydlab.interchoice.domain.Tutor">
+    insert into tutor
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tutorId != null">
+        tutor_id,
+      </if>
+      <if test="tutorName != null">
+        tutor_name,
+      </if>
+      <if test="researchDirection != null">
+        research_direction,
+      </if>
+      <if test="tutorTitle != null">
+        tutor_title,
+      </if>
+      <if test="studentRequirement != null">
+        student_requirement,
+      </if>
+      <if test="educationalBackground != null">
+        ` educational_background`,
+      </if>
+      <if test="tutorDuty != null">
+        tutor_duty,
+      </if>
+      <if test="tutorSex != null">
+        tutor_sex,
+      </if>
+      <if test="tutorAge != null">
+        tutor_age,
+      </if>
+      <if test="favorateCharacter != null">
+        favorate_character,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tutorId != null">
+        #{tutorId,jdbcType=INTEGER},
+      </if>
+      <if test="tutorName != null">
+        #{tutorName,jdbcType=VARCHAR},
+      </if>
+      <if test="researchDirection != null">
+        #{researchDirection,jdbcType=VARCHAR},
+      </if>
+      <if test="tutorTitle != null">
+        #{tutorTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="studentRequirement != null">
+        #{studentRequirement,jdbcType=INTEGER},
+      </if>
+      <if test="educationalBackground != null">
+        #{educationalBackground,jdbcType=VARCHAR},
+      </if>
+      <if test="tutorDuty != null">
+        #{tutorDuty,jdbcType=VARCHAR},
+      </if>
+      <if test="tutorSex != null">
+        #{tutorSex,jdbcType=VARCHAR},
+      </if>
+      <if test="tutorAge != null">
+        #{tutorAge,jdbcType=INTEGER},
+      </if>
+      <if test="favorateCharacter != null">
+        #{favorateCharacter,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ydlab.interchoice.domain.TutorExample" resultType="java.lang.Long">
+    select count(*) from tutor
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tutor
+    <set>
+      <if test="record.tutorId != null">
+        tutor_id = #{record.tutorId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tutorName != null">
+        tutor_name = #{record.tutorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.researchDirection != null">
+        research_direction = #{record.researchDirection,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tutorTitle != null">
+        tutor_title = #{record.tutorTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studentRequirement != null">
+        student_requirement = #{record.studentRequirement,jdbcType=INTEGER},
+      </if>
+      <if test="record.educationalBackground != null">
+        ` educational_background` = #{record.educationalBackground,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tutorDuty != null">
+        tutor_duty = #{record.tutorDuty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tutorSex != null">
+        tutor_sex = #{record.tutorSex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tutorAge != null">
+        tutor_age = #{record.tutorAge,jdbcType=INTEGER},
+      </if>
+      <if test="record.favorateCharacter != null">
+        favorate_character = #{record.favorateCharacter,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tutor
+    set tutor_id = #{record.tutorId,jdbcType=INTEGER},
+      tutor_name = #{record.tutorName,jdbcType=VARCHAR},
+      research_direction = #{record.researchDirection,jdbcType=VARCHAR},
+      tutor_title = #{record.tutorTitle,jdbcType=VARCHAR},
+      student_requirement = #{record.studentRequirement,jdbcType=INTEGER},
+      ` educational_background` = #{record.educationalBackground,jdbcType=VARCHAR},
+      tutor_duty = #{record.tutorDuty,jdbcType=VARCHAR},
+      tutor_sex = #{record.tutorSex,jdbcType=VARCHAR},
+      tutor_age = #{record.tutorAge,jdbcType=INTEGER},
+      favorate_character = #{record.favorateCharacter,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ydlab.interchoice.domain.Tutor">
+    update tutor
+    <set>
+      <if test="tutorName != null">
+        tutor_name = #{tutorName,jdbcType=VARCHAR},
+      </if>
+      <if test="researchDirection != null">
+        research_direction = #{researchDirection,jdbcType=VARCHAR},
+      </if>
+      <if test="tutorTitle != null">
+        tutor_title = #{tutorTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="studentRequirement != null">
+        student_requirement = #{studentRequirement,jdbcType=INTEGER},
+      </if>
+      <if test="educationalBackground != null">
+        ` educational_background` = #{educationalBackground,jdbcType=VARCHAR},
+      </if>
+      <if test="tutorDuty != null">
+        tutor_duty = #{tutorDuty,jdbcType=VARCHAR},
+      </if>
+      <if test="tutorSex != null">
+        tutor_sex = #{tutorSex,jdbcType=VARCHAR},
+      </if>
+      <if test="tutorAge != null">
+        tutor_age = #{tutorAge,jdbcType=INTEGER},
+      </if>
+      <if test="favorateCharacter != null">
+        favorate_character = #{favorateCharacter,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where tutor_id = #{tutorId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ydlab.interchoice.domain.Tutor">
+    update tutor
+    set tutor_name = #{tutorName,jdbcType=VARCHAR},
+      research_direction = #{researchDirection,jdbcType=VARCHAR},
+      tutor_title = #{tutorTitle,jdbcType=VARCHAR},
+      student_requirement = #{studentRequirement,jdbcType=INTEGER},
+      ` educational_background` = #{educationalBackground,jdbcType=VARCHAR},
+      tutor_duty = #{tutorDuty,jdbcType=VARCHAR},
+      tutor_sex = #{tutorSex,jdbcType=VARCHAR},
+      tutor_age = #{tutorAge,jdbcType=INTEGER},
+      favorate_character = #{favorateCharacter,jdbcType=VARCHAR}
+    where tutor_id = #{tutorId,jdbcType=INTEGER}
+  </update>
+</mapper>
