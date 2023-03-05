@@ -6,6 +6,7 @@ import com.ydlab.interchoice.domain.TutorExample;
 import com.ydlab.interchoice.mapper.TutorMapper;
 import com.ydlab.interchoice.req.TutorReq;
 import com.ydlab.interchoice.resp.TutorResp;
+import com.ydlab.interchoice.util.CopyUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -20,14 +21,9 @@ public class TutorService {
     public List<TutorResp> list(TutorReq req){
         TutorExample tutorExample = new TutorExample();
         TutorExample.Criteria criteria = tutorExample.createCriteria();
-        criteria.andResearchDirectionLike("%"+req.getResearchDirection()+"%");
+        criteria.andTutorNameLike("%"+req.getTutorName()+"%");
         List<Tutor> tutorList = tutorMapper.selectByExample(tutorExample);
-        List<TutorResp> respList = new ArrayList<>();
-        for (Tutor tutor:tutorList){
-            TutorResp tutorResp = new TutorResp();
-            BeanUtils.copyProperties(tutor,tutorResp);
-            respList.add(tutorResp);
-        }
-        return respList;
+         List<TutorResp> respList = CopyUtil.copyList(tutorList,TutorResp.class);
+         return respList;
     }
 }
