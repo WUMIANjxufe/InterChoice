@@ -53,11 +53,14 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-
-
+import axios from 'axios'
 export default defineComponent({
   name: 'Home',
-  components: {
-  },
+  setup(){
+    console.log("Setup")
+    axios.get("http://localhost:8880/tutor/list?tutorName=李灵凡").then((response)=>{
+      console.log(response);
+    })
+  }
 });
 </script>
