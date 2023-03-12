@@ -11,13 +11,15 @@
           <template #title>
                 <span>
                   <user-outlined />
-                  subnav 111111111
+                   入学前
                 </span>
           </template>
-          <a-menu-item key="1">option1</a-menu-item>
-          <a-menu-item key="2">option2</a-menu-item>
-          <a-menu-item key="3">option3</a-menu-item>
-          <a-menu-item key="4">option4</a-menu-item>
+          <a-menu-item key="information">
+            <router-link to="/admin/information">填写简历</router-link>
+          </a-menu-item>
+          <a-menu-item key="2">选择导师</a-menu-item>
+          <a-menu-item key="3">预测成功率</a-menu-item>
+          <a-menu-item key="4">初选结果</a-menu-item>
         </a-sub-menu>
         <a-sub-menu key="sub2">
           <template #title>

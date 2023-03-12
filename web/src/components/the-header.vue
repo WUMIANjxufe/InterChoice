@@ -7,9 +7,9 @@
         v-model:selectedKeys="selectedKeys1"
         :style="{ lineHeight: '64px' }"
     >
-      <a-menu-item key="1">研一</a-menu-item>
-      <a-menu-item key="2">研二</a-menu-item>
-      <a-menu-item key="3">研三</a-menu-item>
+      <a-menu-item key="1">
+        <router-link to="/">实验</router-link>
+      </a-menu-item>
     </a-menu>
   </a-layout-header>
 </template>
