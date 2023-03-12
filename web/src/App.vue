@@ -1,18 +1,6 @@
 <template>
   <a-layout>
-    <a-layout-header class="header">
-      <div class="logo" />
-      <a-menu
-          theme="dark"
-          mode="horizontal"
-          v-model:selectedKeys="selectedKeys1"
-          :style="{ lineHeight: '64px' }"
-      >
-        <a-menu-item key="1">nav 1</a-menu-item>
-        <a-menu-item key="2">nav 2</a-menu-item>
-        <a-menu-item key="3">nav 3</a-menu-item>
-      </a-menu>
-    </a-layout-header>
+  <TheHeader></TheHeader>
        <router-view/>
     <a-layout-footer style="text-align: center">
       师生双选虚拟仿真实验平台
@@ -20,18 +8,13 @@
   </a-layout>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent } from 'vue';
+import TheHeader from "@/components/the-header.vue";
 export default defineComponent({
-  components: {
-
-  },
-  setup() {
-    return {
-      selectedKeys1: ref<string[]>(['2']),
-      selectedKeys2: ref<string[]>(['1']),
-      openKeys: ref<string[]>(['sub1']),
-    };
-  },
+  name: 'app',
+  components:{
+    TheHeader
+  }
 });
 </script>
 <style>
