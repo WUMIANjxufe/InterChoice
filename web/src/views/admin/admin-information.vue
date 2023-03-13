@@ -49,15 +49,46 @@
       </a-menu>
     </a-layout-sider>
     <a-layout-content :style="{ padding: '0 24px', minHeight: '280px' }">
-      <div class="about">
-        <a-button type="primary" @click="showModal">简历编辑</a-button>
+      <div class="img">
+        <img src="../../assets/img/info.png" style="width: 200px;height: 400px;margin-left: 300px;margin-top: 10px"/>
+      </div>
+      <div class="button">
+        <a-button type="primary" @click="edit" style="margin-left: 360px;margin-top: 30px">简历编辑</a-button>
       </div>
       <a-modal
           v-model:visible="visible"
           :confirm-loading="modalLoading"
-          title="简历表单"
+          title="简历编辑"
           @ok="handleOk">
-
+        <a-form>
+          <a-form-item label="姓名">
+            <a-input />
+          </a-form-item>
+          <a-form-item label="年龄">
+            <a-input />
+          </a-form-item>
+          <a-form-item label="性别">
+            <a-input />
+          </a-form-item>
+          <a-form-item label="毕业院校">
+            <a-input />
+          </a-form-item>
+          <a-form-item label="毕业院校">
+            <a-input />
+          </a-form-item>
+          <a-form-item label="四级成绩">
+            <a-input />
+          </a-form-item>
+          <a-form-item label="六级成绩">
+            <a-input />
+          </a-form-item>
+          <a-form-item label="性别">
+            <a-radio-group>
+              <a-radio value="1">男</a-radio>
+              <a-radio value="2">女</a-radio>
+            </a-radio-group>
+          </a-form-item>
+        </a-form>
       </a-modal>
     </a-layout-content>
   </a-layout>
@@ -68,7 +99,7 @@ export default defineComponent({
   setup() {
     const visible = ref<boolean>(false);
 
-    const showModal = () => {
+    const edit = () => {
       visible.value = true;
     };
 
@@ -78,7 +109,7 @@ export default defineComponent({
     };
     return {
       visible,
-      showModal,
+      edit,
       handleOk,
     };
   },
