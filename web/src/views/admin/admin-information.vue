@@ -49,11 +49,11 @@
       </a-menu>
     </a-layout-sider>
     <a-layout-content :style="{ padding: '0 24px', minHeight: '280px' }">
-      <div class="img">
-        <img src="../../assets/img/info.png" style="width: 400px;height: 400px;margin-left: 300px;margin-top: 10px"/>
+      <div class="img" style="text-align: center">
+        <img src="../../assets/img/info.png" style="width: 400px;height: 400px;margin-top: 10px;vertical-align:middle"/>
       </div>
-      <div class="button">
-        <a-button type="primary" @click="edit" style="margin-left: 360px;margin-top: 30px">简历编辑</a-button>
+      <div class="button" style="text-align: center">
+        <a-button type="primary" @click="edit" style="margin-top: 30px">简历编辑</a-button>
       </div>
       <a-modal
           v-model:visible="visible"
@@ -67,42 +67,53 @@
             :label-col="labelCol"
             :wrapper-col="wrapperCol"
         >
-          <a-form-item ref="name" label="Activity name" name="name">
+          <a-form-item ref="name" label="姓名" name="name">
             <a-input v-model:value="formState.name" />
           </a-form-item>
-          <a-form-item label="Activity zone" name="region">
-            <a-select v-model:value="formState.region" placeholder="please select your zone">
-              <a-select-option value="shanghai">Zone one</a-select-option>
-              <a-select-option value="beijing">Zone two</a-select-option>
-            </a-select>
+          <a-form-item ref="name" label="年龄" name="age">
+            <a-input v-model:value="formState.age" />
           </a-form-item>
-          <a-form-item label="Activity time" required name="date1">
-            <a-date-picker
-                v-model:value="formState.date1"
-                show-time
-                type="date"
-                placeholder="Pick a date"
-                style="width: 100%"
-            />
-          </a-form-item>
-          <a-form-item label="Instant delivery" name="delivery">
-            <a-switch v-model:checked="formState.delivery" />
-          </a-form-item>
-          <a-form-item label="Activity type" name="type">
-            <a-checkbox-group v-model:value="formState.type">
-              <a-checkbox value="1" name="type">Online</a-checkbox>
-              <a-checkbox value="2" name="type">Promotion</a-checkbox>
-              <a-checkbox value="3" name="type">Offline</a-checkbox>
-            </a-checkbox-group>
-          </a-form-item>
-          <a-form-item label="Resources" name="resource">
-            <a-radio-group v-model:value="formState.resource">
-              <a-radio value="1">Sponsor</a-radio>
-              <a-radio value="2">Venue</a-radio>
+          <a-form-item label="性别" name="sex">
+            <a-radio-group v-model:value="formState.sex">
+              <a-radio value="1">男</a-radio>
+              <a-radio value="2">女</a-radio>
             </a-radio-group>
           </a-form-item>
-          <a-form-item label="Activity form" name="desc">
-            <a-textarea v-model:value="formState.desc" />
+          <a-form-item label="政治面貌" name="status">
+            <a-radio-group v-model:value="formState.status">
+              <a-radio value="1">群众</a-radio>
+              <a-radio value="2">共青团员</a-radio>
+              <a-radio value="3">中共党员</a-radio>
+              <a-radio value="4">民主党派成员</a-radio>
+            </a-radio-group>
+          </a-form-item>
+          <a-form-item label="考研排名" name="rank">
+            <a-radio-group v-model:value="formState.rank">
+              <a-radio value="1" style="margin-left: 10px">前10%</a-radio>
+              <a-radio value="2" style="margin-left: 10px">前30%</a-radio>
+              <a-radio value="3" style="margin-left: 10px">前50%</a-radio>
+              <a-radio value="4" style="margin-left: 10px">前70%</a-radio>
+              <a-radio value="5" style="margin-left: 10px">其他</a-radio>
+            </a-radio-group>
+          </a-form-item>
+          <a-form-item label="四级" name="cet4">
+            <a-radio-group v-model:value="formState.cet4">
+              <a-radio value="1">通过</a-radio>
+              <a-radio value="2">未通过</a-radio>
+            </a-radio-group>
+          </a-form-item>
+          <a-form-item label="六级" name="cet6">
+            <a-radio-group v-model:value="formState.cet6">
+              <a-radio value="1">通过</a-radio>
+              <a-radio value="2">未通过</a-radio>
+            </a-radio-group>
+          </a-form-item>
+          <a-form-item label="兴趣方向" name="type">
+            <a-checkbox-group v-model:value="formState.type">
+              <a-checkbox value="1" name="type" style="margin-left: 10px">机器学习</a-checkbox>
+              <a-checkbox value="2" name="type" style="margin-left: 10px">数据挖掘</a-checkbox>
+              <a-checkbox value="3" name="type" style="margin-left: 10px">自然语言处理</a-checkbox>
+            </a-checkbox-group>
           </a-form-item>
           <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
             <a-button type="primary" @click="onSubmit">Create</a-button>
@@ -119,12 +130,13 @@ import { Moment } from 'moment';
 import { defineComponent, reactive, ref, toRaw, UnwrapRef } from 'vue';
 interface FormState {
   name: string;
-  region: string | undefined;
-  date1: Moment | undefined;
-  delivery: boolean;
+  age:string;
+  sex:string;
+  status:string;
+  cet4:string;
+  cet6:string;
+  rank:string;
   type: string[];
-  resource: string;
-  desc: string;
 }
 export default defineComponent({
   setup() {
@@ -136,30 +148,35 @@ export default defineComponent({
     const formRef = ref();
     const formState: UnwrapRef<FormState> = reactive({
       name: '',
-      region: undefined,
-      date1: undefined,
-      delivery: false,
       type: [],
-      resource: '',
-      desc: '',
+      age:'',
+      sex:'',
+      cet4:'',
+      cet6:'',
+      status:'',
+      rank:''
     });
     const rules = {
       name: [
-        { required: true, message: 'Please input Activity name', trigger: 'blur' },
-        { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' },
+        { required: true, message: '输入你的名字', trigger: 'blur' },
+        { min: 1, max: 10, message: '长度不能超过10', trigger: 'blur' },
       ],
-      region: [{ required: true, message: 'Please select Activity zone', trigger: 'change' }],
-      date1: [{ required: true, message: 'Please pick a date', trigger: 'change', type: 'object' }],
+      age: [{ required: true, message: '输入你的年龄', trigger: 'blur' }],
+      sex: [{ required: true, message: '选择你的性别', trigger: 'change' }],
+      status: [{ required: true, message: '选择你的政治面貌', trigger: 'change' }],
+      cet4: [{ required: true, message: '四级是否通过', trigger: 'change' }],
+      cet6: [{ required: true, message: '六级是否通过', trigger: 'change' }],
+      rank: [{ required: true, message: '选择你的成绩排名', trigger: 'change' }],
       type: [
         {
           type: 'array',
           required: true,
-          message: 'Please select at least one activity type',
+          message: '请选择至少一个感兴趣的方向',
           trigger: 'change',
         },
       ],
-      resource: [{ required: true, message: 'Please select activity resource', trigger: 'change' }],
-      desc: [{ required: true, message: 'Please input activity form', trigger: 'blur' }],
+      // resource: [{ required: true, message: 'Please select activity resource', trigger: 'change' }],
+      // desc: [{ required: true, message: 'Please input activity form', trigger: 'blur' }],
     };
     const onSubmit = () => {
       formRef.value
