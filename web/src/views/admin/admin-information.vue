@@ -180,7 +180,7 @@ export default defineComponent({
       // desc: [{ required: true, message: 'Please input activity form', trigger: 'blur' }],
     };
     const onSubmit = () => {
-            axios.post("/studentintro/save",formRef.value).then((response)=>{
+            axios.post(process.env.VUE_APP_SERVER+"/studentintro/save",formRef.value).then((response)=>{
               const data = response.data;
               if(data.success){
                 visible.value = false;
