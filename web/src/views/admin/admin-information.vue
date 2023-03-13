@@ -116,8 +116,8 @@
             </a-checkbox-group>
           </a-form-item>
           <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
-            <a-button type="primary" @click="onSubmit">Create</a-button>
-            <a-button style="margin-left: 10px" @click="resetForm">Reset</a-button>
+            <a-button type="primary" @click="onSubmit">保存</a-button>
+            <a-button style="margin-left: 10px" @click="resetForm">重置</a-button>
           </a-form-item>
         </a-form>
       </a-modal>
@@ -126,6 +126,7 @@
 </template>
 <script lang="ts">
 import { ValidateErrorEntity } from 'ant-design-vue/es/form/interface';
+import axios from 'axios';
 import { Moment } from 'moment';
 import { defineComponent, reactive, ref, toRaw, UnwrapRef } from 'vue';
 interface FormState {
@@ -179,14 +180,14 @@ export default defineComponent({
       // desc: [{ required: true, message: 'Please input activity form', trigger: 'blur' }],
     };
     const onSubmit = () => {
-      formRef.value
-          .validate()
-          .then(() => {
+            axios.post("/studentintro/save",formRef.value).then((response)=>{
+              const data = response.data;
+              if(data.success){
+                visible.value = false;
+                console.log("success");
+              }
+            });
             console.log('values', formState, toRaw(formState));
-          })
-          .catch((error: ValidateErrorEntity<FormState>) => {
-            console.log('error', error);
-          });
     };
     const resetForm = () => {
       formRef.value.resetFields();
