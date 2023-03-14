@@ -1,5 +1,4 @@
 <template>
-
   <a-layout>
     <a-layout-sider width="200" style="background: #fff">
       <a-menu
@@ -15,10 +14,15 @@
                    入学前
                 </span>
           </template>
+          <a-menu-item key="begin">
+            <router-link to="/admin/begin">开场</router-link>
+          </a-menu-item>
           <a-menu-item key="information">
             <router-link to="/admin/information">填写简历</router-link>
           </a-menu-item>
-          <a-menu-item key="2">选择导师</a-menu-item>
+          <a-menu-item key="choice">
+            <router-link to="/admin/choice">选择导师</router-link>
+          </a-menu-item>
           <a-menu-item key="3">预测成功率</a-menu-item>
           <a-menu-item key="4">初选结果</a-menu-item>
         </a-sub-menu>
@@ -108,15 +112,15 @@
               <a-radio value="2">未通过</a-radio>
             </a-radio-group>
           </a-form-item>
-          <a-form-item label="兴趣方向" name="type">
-            <a-checkbox-group v-model:value="formState.type">
-              <a-checkbox value="1" name="type" style="margin-left: 10px">机器学习</a-checkbox>
-              <a-checkbox value="2" name="type" style="margin-left: 10px">数据挖掘</a-checkbox>
-              <a-checkbox value="3" name="type" style="margin-left: 10px">自然语言处理</a-checkbox>
+          <a-form-item label="兴趣方向" name="Interested_direction">
+            <a-checkbox-group v-model:value="formState.Interested_direction">
+              <a-checkbox value="1" name="Interested_direction" style="margin-left: 10px">机器学习</a-checkbox>
+              <a-checkbox value="2" name="Interested_direction" style="margin-left: 10px">数据挖掘</a-checkbox>
+              <a-checkbox value="3" name="Interested_direction" style="margin-left: 10px">自然语言处理</a-checkbox>
             </a-checkbox-group>
           </a-form-item>
           <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
-            <a-button type="primary" @click="onSubmit">保存</a-button>
+            <a-button type="primary" @click="onSubmit" id="SaveButton">保存</a-button>
             <a-button style="margin-left: 10px" @click="resetForm">重置</a-button>
           </a-form-item>
         </a-form>
@@ -127,8 +131,8 @@
 <script lang="ts">
 import { ValidateErrorEntity } from 'ant-design-vue/es/form/interface';
 import axios from 'axios';
-import { Moment } from 'moment';
-import { defineComponent, reactive, ref, toRaw, UnwrapRef } from 'vue';
+import { defineComponent, ref } from 'vue';
+import { useRouter } from 'vue-router'
 interface FormState {
   name: string;
   age:string;
@@ -137,19 +141,18 @@ interface FormState {
   cet4:string;
   cet6:string;
   rank:string;
-  type: string[];
+  Interested_direction: string[];
 }
 export default defineComponent({
   setup() {
     const visible = ref<boolean>(false);
-
     const edit = () => {
       visible.value = true;
     };
     const formRef = ref();
-    const formState: UnwrapRef<FormState> = reactive({
+    const formState = ref({
       name: '',
-      type: [],
+      Interested_direction: [],
       age:'',
       sex:'',
       cet4:'',
@@ -168,7 +171,7 @@ export default defineComponent({
       cet4: [{ required: true, message: '四级是否通过', trigger: 'change' }],
       cet6: [{ required: true, message: '六级是否通过', trigger: 'change' }],
       rank: [{ required: true, message: '选择你的成绩排名', trigger: 'change' }],
-      type: [
+      Interested_direction: [
         {
           type: 'array',
           required: true,
@@ -179,15 +182,29 @@ export default defineComponent({
       // resource: [{ required: true, message: 'Please select activity resource', trigger: 'change' }],
       // desc: [{ required: true, message: 'Please input activity form', trigger: 'blur' }],
     };
+    const router = useRouter()
     const onSubmit = () => {
-            axios.post(process.env.VUE_APP_SERVER+"/studentintro/save",formRef.value).then((response)=>{
-              const data = response.data;
-              if(data.success){
-                visible.value = false;
-                console.log("success");
-              }
-            });
-            console.log('values', formState, toRaw(formState));
+      console.log(formState.value);
+      formRef.value
+          .validate()
+          .then(() => {
+                    axios.post("/resume/save",formState.value)
+                        .then((response)=>{
+                      console.log("resp");
+                      visible.value = false;
+                      const data = response.data;
+                      if(data.success){
+                        visible.value = false;
+                        console.log("success");
+                        router.push('/admin/choice')
+                      }else {
+                        console.log(data);
+                      }
+                    });
+          })
+          .catch((error: ValidateErrorEntity<FormState>) => {
+            console.log('error', error);
+          });
     };
     const resetForm = () => {
       formRef.value.resetFields();
