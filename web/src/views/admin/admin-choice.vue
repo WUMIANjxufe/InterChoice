@@ -21,9 +21,11 @@
             <router-link to="/admin/information">填写简历</router-link>
           </a-menu-item>
           <a-menu-item key="choice">
-            <router-link to="/admin/choice">选择导师</router-link>
+            <router-link to="/admin/choice">选择导师1</router-link>
           </a-menu-item>
-          <a-menu-item key="3">预测成功率</a-menu-item>
+          <a-menu-item key="teacher">
+            <router-link to="/admin/teacher">选择导师2</router-link>
+          </a-menu-item>
           <a-menu-item key="4">初选结果</a-menu-item>
         </a-sub-menu>
         <a-sub-menu key="sub2">
@@ -56,28 +58,28 @@
       <p align="center">
         <video src="../../assets/video/3.mp4" id="video3" style="width:50%;height: auto" autoplay controls></video>
       </p>
+      <a-modal v-model:visible="modalvisible"  title="选择导师" @ok="handleModalOk">
+        <a-form>
+        </a-form>
+      </a-modal>
     </a-layout-content>
   </a-layout>
 </template>
 <script>
 
-import {defineComponent, onMounted} from 'vue';
-import {useRouter} from "vue-router";
-
-
+import {defineComponent, onMounted,ref} from 'vue';
 export default defineComponent({
   setup() {
+    const modalvisible = ref(false)
     onMounted(() => {
-      const router = useRouter()
       console.log(222)
       const video3 = document.getElementById("video3")
       video3.addEventListener("ended",() => {
-        console.log(111)
-        //router.push('/admin/information')
+        modalvisible.value = true;
       })
     })
     return {
-
+      modalvisible
     };
   },
 });
