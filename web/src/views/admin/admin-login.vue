@@ -25,15 +25,17 @@ import router from "@/router";
 export default defineComponent({
   setup() {
     const login = () => {
-          let id = parseInt(document.getElementById("username").value);
-          let pd = document.getElementById("password").value;
+      let id = parseInt(document.getElementById("username").value);
+      let pd = hexMd5(document.getElementById("password").value);
       //qs.stringify 是把一个参数对象格式化为一个字符串。
-      const data = Qs.stringify({"username": id, "password": pd});
+      const data = Qs.stringify({"studentId": id, "password": pd});
+      console.log("data"+data)
       axios.post("http://localhost:8880/login",data).then(res=>{
-            if(res.data.message=="登陆成功"){
+           console.log("res"+res)
+            if(res.data.content.password!=null){
               console.log("页面跳转")
               router.push('/admin/begin')
-            }else{
+            }else if(res.data.content.password==null){
               alert("账号或密码错误")
             }
           })

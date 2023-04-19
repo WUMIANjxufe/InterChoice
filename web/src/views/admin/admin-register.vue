@@ -47,6 +47,7 @@ export default defineComponent({
           let id = parseInt(document.getElementById("sid").value);
           let ue = document.getElementById("username").value;
           let pd = document.getElementById("password").value;
+          console.log(pd)
       //qs.stringify 是把一个参数对象格式化为一个字符串。
       const data = Qs.stringify({"studentId": id, "password": pd,"studentName": ue});
       axios.post("http://localhost:8880/register",data).then(res=>{

@@ -4,6 +4,24 @@ public class LoginResp {
     private Integer studentId;
 
     private String studentName;
+    private String token;
+    private String password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 
     public Integer getStudentId() {
         return studentId;
@@ -20,13 +38,11 @@ public class LoginResp {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", studentId=").append(studentId);
-        sb.append(", studentName=").append(studentName);
-        sb.append("]");
-        return sb.toString();
+        return "LoginResp{" +
+                "studentId=" + studentId +
+                ", studentName='" + studentName + '\'' +
+                ", token='" + token + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }
