@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ydlab.interchoice.mapper.SturesumeMapper">
+  <resultMap id="BaseResultMap" type="com.ydlab.interchoice.domain.Sturesume">
+    <id column="name" jdbcType="VARCHAR" property="name" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="rank" jdbcType="VARCHAR" property="rank" />
+    <result column="cet4" jdbcType="VARCHAR" property="cet4" />
+    <result column="cet6" jdbcType="VARCHAR" property="cet6" />
+    <result column="Interested_direction" jdbcType="VARCHAR" property="interestedDirection" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    `name`, `status`, `rank`, cet4, cet6, Interested_direction
+  </sql>
+  <select id="selectByExample" parameterType="com.ydlab.interchoice.domain.SturesumeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sturesume
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sturesume
+    where `name` = #{name,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sturesume
+    where `name` = #{name,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ydlab.interchoice.domain.SturesumeExample">
+    delete from sturesume
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ydlab.interchoice.domain.Sturesume">
+    insert into sturesume (`name`, `status`, `rank`, 
+      cet4, cet6, Interested_direction
+      )
+    values (#{name,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{rank,jdbcType=VARCHAR}, 
+      #{cet4,jdbcType=VARCHAR}, #{cet6,jdbcType=VARCHAR}, #{interestedDirection,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ydlab.interchoice.domain.Sturesume">
+    insert into sturesume
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="rank != null">
+        `rank`,
+      </if>
+      <if test="cet4 != null">
+        cet4,
+      </if>
+      <if test="cet6 != null">
+        cet6,
+      </if>
+      <if test="interestedDirection != null">
+        Interested_direction,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="rank != null">
+        #{rank,jdbcType=VARCHAR},
+      </if>
+      <if test="cet4 != null">
+        #{cet4,jdbcType=VARCHAR},
+      </if>
+      <if test="cet6 != null">
+        #{cet6,jdbcType=VARCHAR},
+      </if>
+      <if test="interestedDirection != null">
+        #{interestedDirection,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ydlab.interchoice.domain.SturesumeExample" resultType="java.lang.Long">
+    select count(*) from sturesume
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sturesume
+    <set>
+      <if test="record.name != null">
+        `name` = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        `status` = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rank != null">
+        `rank` = #{record.rank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cet4 != null">
+        cet4 = #{record.cet4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cet6 != null">
+        cet6 = #{record.cet6,jdbcType=VARCHAR},
+      </if>
+      <if test="record.interestedDirection != null">
+        Interested_direction = #{record.interestedDirection,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sturesume
+    set `name` = #{record.name,jdbcType=VARCHAR},
+      `status` = #{record.status,jdbcType=VARCHAR},
+      `rank` = #{record.rank,jdbcType=VARCHAR},
+      cet4 = #{record.cet4,jdbcType=VARCHAR},
+      cet6 = #{record.cet6,jdbcType=VARCHAR},
+      Interested_direction = #{record.interestedDirection,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ydlab.interchoice.domain.Sturesume">
+    update sturesume
+    <set>
+      <if test="status != null">
+        `status` = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="rank != null">
+        `rank` = #{rank,jdbcType=VARCHAR},
+      </if>
+      <if test="cet4 != null">
+        cet4 = #{cet4,jdbcType=VARCHAR},
+      </if>
+      <if test="cet6 != null">
+        cet6 = #{cet6,jdbcType=VARCHAR},
+      </if>
+      <if test="interestedDirection != null">
+        Interested_direction = #{interestedDirection,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where `name` = #{name,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ydlab.interchoice.domain.Sturesume">
+    update sturesume
+    set `status` = #{status,jdbcType=VARCHAR},
+      `rank` = #{rank,jdbcType=VARCHAR},
+      cet4 = #{cet4,jdbcType=VARCHAR},
+      cet6 = #{cet6,jdbcType=VARCHAR},
+      Interested_direction = #{interestedDirection,jdbcType=VARCHAR}
+    where `name` = #{name,jdbcType=VARCHAR}
+  </update>
+</mapper>

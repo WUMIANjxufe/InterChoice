@@ -58,18 +58,119 @@
       <p align="center">
         <video src="../../assets/video/3.mp4" id="video3" style="width:50%;height: auto" autoplay controls></video>
       </p>
-      <a-modal v-model:visible="modalvisible"  title="选择导师" @ok="handleModalOk">
-        <a-form>
-        </a-form>
+      <a-modal v-model:visible="modalvisible"  title="选择导师" @ok="handleModalOk" style="width: 80%">
+        <a-table :columns="columns" :data-source="data" style="width: 100%">
+          <template #name="{ text }">
+            <a>{{ text }}</a>
+          </template>
+          <template #tags="{ text: tags }">
+      <span>
+        <a-tag
+            v-for="tag in tags"
+            :key="tag"
+            :color="tag === 'loser' ? 'volcano' : tag.length > 5 ? 'geekblue' : 'green'"
+        >
+          {{ tag.toUpperCase() }}
+        </a-tag>
+      </span>
+          </template>
+        </a-table>
       </a-modal>
     </a-layout-content>
   </a-layout>
 </template>
 <script>
-
+import { SmileOutlined, DownOutlined } from '@ant-design/icons-vue';
 import {defineComponent, onMounted,ref} from 'vue';
+import axios from "axios";
+const columns = [
+  {
+    title: '姓名',
+    dataIndex: 'name',
+    key: 'name',
+  },
+  {
+    title: '年龄',
+    dataIndex: 'age',
+    key: 'age',
+  },
+  {
+    title: '性别',
+    dataIndex: 'address',
+    key: 'address',
+  },
+  {
+    title: '职称',
+    key: 'tags',
+    dataIndex: 'tags',
+    slots: { customRender: 'tags' },
+  },
+  {
+    title: '选择',
+    key: 'action'
+  },
+  {
+    title: '预测成功率',
+    key: 'predict'
+  }
+];
+
+const data = [
+  {
+    key: '1',
+    name: 'John Brown',
+    age: 32,
+    address: 'New York No. 1 Lake Park',
+    tags: ['nice', 'developer'],
+  },
+  {
+    key: '2',
+    name: 'Jim Green',
+    age: 42,
+    address: 'London No. 1 Lake Park',
+    tags: ['loser'],
+  },
+  {
+    key: '3',
+    name: 'Joe Black',
+    age: 32,
+    address: 'Sidney No. 1 Lake Park',
+    tags: ['cool', 'teacher'],
+  },
+  {
+    key: '3',
+    name: 'Joe Black',
+    age: 32,
+    address: 'Sidney No. 1 Lake Park',
+    tags: ['cool', 'teacher'],
+  },
+  {
+    key: '3',
+    name: 'Joe Black',
+    age: 32,
+    address: 'Sidney No. 1 Lake Park',
+    tags: ['cool', 'teacher'],
+  },
+  {
+    key: '3',
+    name: 'Joe Black',
+    age: 32,
+    address: 'Sidney No. 1 Lake Park',
+    tags: ['cool', 'teacher'],
+  },
+  {
+    key: '3',
+    name: 'Joe Black',
+    age: 32,
+    address: 'Sidney No. 1 Lake Park',
+    tags: ['cool', 'teacher'],
+  }
+];
 export default defineComponent({
   setup() {
+    axios.get("/choice/tutorList").then((res) => {
+      console.log(res.data)
+    });
     const modalvisible = ref(false)
     onMounted(() => {
       console.log(222)
@@ -79,8 +180,14 @@ export default defineComponent({
       })
     })
     return {
-      modalvisible
+      modalvisible,
+      data,
+      columns
     };
+  },
+  components: {
+    SmileOutlined,
+    DownOutlined,
   },
 });
 </script>

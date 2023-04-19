@@ -188,6 +188,9 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+  <select id="selectAll" resultType="com.ydlab.interchoice.domain.Tutor">
+    select * from tutor
+  </select>
   <update id="updateByExampleSelective" parameterType="map">
     update tutor
     <set>

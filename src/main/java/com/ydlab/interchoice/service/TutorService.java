@@ -7,6 +7,7 @@ import com.ydlab.interchoice.mapper.TutorMapper;
 import com.ydlab.interchoice.req.TutorReq;
 import com.ydlab.interchoice.resp.TutorResp;
 import com.ydlab.interchoice.util.CopyUtil;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -25,5 +26,12 @@ public class TutorService {
         List<Tutor> tutorList = tutorMapper.selectByExample(tutorExample);
          List<TutorResp> respList = CopyUtil.copyList(tutorList,TutorResp.class);
          return respList;
+    }
+    public List<TutorResp> tutorlist(){
+         List<Tutor> tutorList = tutorMapper.selectAll();
+        System.out.println("tutorList"+ tutorMapper.selectAll());
+        List<TutorResp> respList = CopyUtil.copyList(tutorList,TutorResp.class);
+        System.out.println("resplist"+respList);
+        return respList;
     }
 }

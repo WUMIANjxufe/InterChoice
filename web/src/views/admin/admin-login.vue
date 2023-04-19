@@ -3,7 +3,7 @@
   <p class="p1">登录系统</p>
   <a-form>
     <a-form-item>
-      <a-input placeholder="用户名" id="username"></a-input>
+      <a-input placeholder="账号" id="username"></a-input>
     </a-form-item>
     <a-form-item>
       <a-input-password placeholder="密码" id="password"></a-input-password>
@@ -32,14 +32,14 @@ export default defineComponent({
       axios.post("http://localhost:8880/login",data).then(res=>{
             if(res.data.message=="登陆成功"){
               console.log("页面跳转")
-              router.push('/home')
+              router.push('/admin/begin')
             }else{
               alert("账号或密码错误")
             }
           })
         }
     const register = () => {
-      alert("暂不支持注册，仅供内部成员使用")
+      router.push('/register')
     }
     return{
       login,

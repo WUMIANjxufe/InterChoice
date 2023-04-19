@@ -3,6 +3,8 @@ package com.ydlab.interchoice.mapper;
 import com.ydlab.interchoice.domain.Tutor;
 import com.ydlab.interchoice.domain.TutorExample;
 import java.util.List;
+
+import com.ydlab.interchoice.resp.TutorResp;
 import org.apache.ibatis.annotations.Param;
 
 public interface TutorMapper {
@@ -27,4 +29,6 @@ public interface TutorMapper {
     int updateByPrimaryKeySelective(Tutor record);
 
     int updateByPrimaryKey(Tutor record);
+
+    List<Tutor> selectAll();
 }
