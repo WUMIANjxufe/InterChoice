@@ -1,6 +1,8 @@
 package com.ydlab.interchoice.resp;
 
-public class LoginResp {
+import java.io.Serializable;
+
+public class LoginResp implements Serializable {
     private Integer studentId;
 
     private String studentName;
