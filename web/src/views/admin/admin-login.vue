@@ -32,10 +32,10 @@ export default defineComponent({
       const data = Qs.stringify({"studentId": id, "password": pd});
       console.log("data"+data)
       axios.post("http://localhost:8880/login",data).then(res=>{
-           console.log("res"+res)
+           console.log("restoken"+res.data.content.token)
             if(res.data.content.password!=null){
-              console.log("页面跳转")
-              store.commit("setUser",id+res.data.content.studentName)
+              console.log("登录成功，页面跳转")
+              store.commit("setUser",res.data.content)
               router.push('/admin/begin')
             }else if(res.data.content.password==null){
               alert("账号或密码错误")

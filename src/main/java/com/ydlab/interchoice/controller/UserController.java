@@ -37,32 +37,17 @@ public class UserController {
         LOG.info("生成单点登录token：{}，并放入redis中", token);
         userLoginResp.setToken(token.toString());
         redisTemplate.opsForValue().set(token,JSONObject.toJSONString(userLoginResp), 3600 * 24, TimeUnit.SECONDS);
-
         resp.setContent(userLoginResp);
         System.out.println("content"+resp);
         return resp;
     }
-//    @ResponseBody
-//    @RequestMapping(value = "/login", method = RequestMethod.POST)
-//    public CommonResp login(HttpSession session, ModelMap map, @RequestParam("username")int studentid,
-//                           @RequestParam("password")String password){
-//        CommonResp resp = new CommonResp<>();
-//        Login userEntity = loginService.findUserByName(studentid);
-//        if(userEntity!=null && userEntity.getPassword().equals(password)){
-//            session.setAttribute("id", userEntity.getStudentId());
-//            session.setAttribute("name",userEntity.getStudentName());
-//            session.setAttribute("user",userEntity);
-//            System.out.println("success");
-//            resp.setMessage("登陆成功");
-//            return resp;
-//        }else{
-//            System.out.println("123123123");
-//            map.put("msg", "用户名或者密码错误");
-//            map.addAttribute("tip","密码或者用户名错误");
-//            resp.setMessage("用户名或者密码错误");
-//            return resp;
-//        }
-//    }
+    @GetMapping("/logout/{token}")
+    public CommonResp logout(@PathVariable String token){
+        CommonResp resp = new CommonResp<>();
+        redisTemplate.delete(Long.valueOf(token));
+        LOG.info("从redis中删除token:{}",token);
+        return resp;
+    }
     @ResponseBody
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public CommonResp register( RegisterReq req){
