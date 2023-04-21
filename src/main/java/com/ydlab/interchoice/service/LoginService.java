@@ -34,7 +34,6 @@ public class LoginService {
         if (ObjectUtils.isEmpty(userDb)) {
             // 用户ID不存在
             LoginResp userLoginResp1 =new LoginResp();
-            userLoginResp1.setStudentId(0);
             LOG.info("用户名不存在, {}", req.getStudentId());
             return  userLoginResp1;
         } else {
@@ -46,7 +45,6 @@ public class LoginService {
                 // 密码不对
                 LOG.info("密码不对, 输入密码：{}, 数据库密码：{}", req.getPassword(), userDb.getPassword());
                 LoginResp userLoginResp2 =new LoginResp();
-                userLoginResp2.setPassword(null);
                 return userLoginResp2;
             }
         }

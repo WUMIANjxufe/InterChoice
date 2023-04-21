@@ -1,7 +1,6 @@
 package com.ydlab.interchoice.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.ydlab.interchoice.domain.Login;
 import com.ydlab.interchoice.req.LoginReq;
 import com.ydlab.interchoice.req.RegisterReq;
 import com.ydlab.interchoice.resp.CommonResp;
@@ -11,12 +10,10 @@ import com.ydlab.interchoice.util.SnowFlake;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.ui.ModelMap;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
 import java.util.concurrent.TimeUnit;
 
 @RestController
@@ -27,21 +24,22 @@ public class UserController {
     @Resource
     private SnowFlake snowFlake;
     @Resource
-    private RedisTemplate redisTemplate;
+    private RedisTemplate<Long, String> redisTemplate;
     @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public CommonResp login(LoginReq req) {
+    public CommonResp<LoginResp> login(LoginReq req) {
         System.out.println("req"+req);
        // req.setPassword(DigestUtils.md5DigestAsHex(req.getPassword().getBytes()));
         CommonResp<LoginResp> resp = new CommonResp<>();
         LoginResp userLoginResp = loginService.login(req);
-
+        System.out.println("userLoginResp"+userLoginResp);
         Long token = snowFlake.nextId();
         LOG.info("生成单点登录token：{}，并放入redis中", token);
         userLoginResp.setToken(token.toString());
-        redisTemplate.opsForValue().set(token.toString(), JSONObject.toJSONString(userLoginResp), 3600 * 24, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set(token,JSONObject.toJSONString(userLoginResp), 3600 * 24, TimeUnit.SECONDS);
 
         resp.setContent(userLoginResp);
+        System.out.println("content"+resp);
         return resp;
     }
 //    @ResponseBody

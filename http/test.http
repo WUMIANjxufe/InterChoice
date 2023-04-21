@@ -1,3 +1,7 @@
+GET http://localhost:8880/redis/get/304456366909689856
+Accept: application/json
+
+###
 POST http://localhost:8880/login?username=1&password=12
 Content-Type: application/json
 
