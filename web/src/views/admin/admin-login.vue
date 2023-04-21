@@ -22,6 +22,7 @@ import {defineComponent} from "vue";
 import axios from "axios";
 import Qs from "qs";
 import router from "@/router";
+import store from "@/store";
 export default defineComponent({
   setup() {
     const login = () => {
@@ -34,6 +35,7 @@ export default defineComponent({
            console.log("res"+res)
             if(res.data.content.password!=null){
               console.log("页面跳转")
+              store.commit("setUser",id+res.data.content.studentName)
               router.push('/admin/begin')
             }else if(res.data.content.password==null){
               alert("账号或密码错误")
