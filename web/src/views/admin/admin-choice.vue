@@ -3,15 +3,16 @@
     <a-layout-sider width="200" style="background: #fff">
       <a-menu
           mode="inline"
-          v-model:selectedKeys="selectedKeys2"
+          v-model:selectedKeys="selectedKeys"
           v-model:openKeys="openKeys"
+          @openChange="onOpenChange"
           style="height: 100%"
       >
         <a-sub-menu key="sub1">
           <template #title>
                 <span>
                   <user-outlined />
-                   入学前
+                   实验流程
                 </span>
           </template>
           <a-menu-item key="begin">
@@ -27,30 +28,6 @@
             <router-link to="/admin/teacher">选择导师2</router-link>
           </a-menu-item>
           <a-menu-item key="4">初选结果</a-menu-item>
-        </a-sub-menu>
-        <a-sub-menu key="sub2">
-          <template #title>
-                <span>
-                  <laptop-outlined />
-                  subnav 2
-                </span>
-          </template>
-          <a-menu-item key="5">option5</a-menu-item>
-          <a-menu-item key="6">option6</a-menu-item>
-          <a-menu-item key="7">option7</a-menu-item>
-          <a-menu-item key="8">option8</a-menu-item>
-        </a-sub-menu>
-        <a-sub-menu key="sub3">
-          <template #title>
-                <span>
-                  <notification-outlined />
-                  subnav 3
-                </span>
-          </template>
-          <a-menu-item key="9">option9</a-menu-item>
-          <a-menu-item key="10">option10</a-menu-item>
-          <a-menu-item key="11">option11</a-menu-item>
-          <a-menu-item key="12">option12</a-menu-item>
         </a-sub-menu>
       </a-menu>
     </a-layout-sider>
@@ -81,7 +58,7 @@
 </template>
 <script>
 import { SmileOutlined, DownOutlined } from '@ant-design/icons-vue';
-import {defineComponent, onMounted,ref} from 'vue';
+import {defineComponent, onMounted, reactive, ref, toRefs} from 'vue';
 import axios from "axios";
 const columns = [
   {
@@ -179,10 +156,20 @@ export default defineComponent({
         modalvisible.value = true;
       })
     })
+    const state = reactive({
+      rootSubmenuKeys: ['sub1'],
+      openKeys: ['sub1'],
+      selectedKeys: [],
+    });
+    const onOpenChange = (openKeys) => {
+      state.openKeys = openKeys;
+    };
     return {
+      ...toRefs(state),
       modalvisible,
       data,
-      columns
+      columns,
+      onOpenChange
     };
   },
   components: {
