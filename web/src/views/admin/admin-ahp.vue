@@ -37,29 +37,18 @@
       </p>
       <a-modal v-model:visible="modalvisible"  title="选择导师" @ok="handleModalOk" style="width: 80%">
         <a-table :columns="columns" :data-source="data" style="width: 100%">
-          <template #name="{ text }">
-            <a>{{ text }}</a>
-          </template>
-          <template #tags="{ text: tags }">
-      <span>
-        <a-tag
-            v-for="tag in tags"
-            :key="tag"
-            :color="tag === 'loser' ? 'volcano' : tag.length > 5 ? 'geekblue' : 'green'"
-        >
-          {{ tag.toUpperCase() }}
-        </a-tag>
-      </span>
-          </template>
         </a-table>
+        <a-button @click="info" type="primary">填表前请点此看提示</a-button>
       </a-modal>
     </a-layout-content>
   </a-layout>
 </template>
 <script>
-import { SmileOutlined, DownOutlined } from '@ant-design/icons-vue';
-import {defineComponent, onMounted, reactive, ref, toRefs} from 'vue';
+import {SmileOutlined, DownOutlined} from '@ant-design/icons-vue';
+import {defineComponent, h, onMounted, reactive, ref, toRefs} from 'vue';
 import axios from "axios";
+import {Modal} from "ant-design-vue";
+import AHP from "@/assets/img/AHP.png"
 const columns = [
   {
     title: '姓名',
@@ -164,7 +153,20 @@ export default defineComponent({
     const onOpenChange = (openKeys) => {
       state.openKeys = openKeys;
     };
+    const info = () => {
+      Modal.info({
+        style:"width:1000px",
+        title: () => '打分标准',
+        content: () => h('div', {style:"width:1000px"}, [
+          h('img', {src:AHP}),
+        ]),
+        onOk() {
+          console.log('ok');
+        },
+      });
+    };
     return {
+      info,
       ...toRefs(state),
       modalvisible,
       data,

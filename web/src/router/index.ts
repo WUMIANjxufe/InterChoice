@@ -2,14 +2,21 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from  '../views/admin/admin-login.vue'
 import Register from '../views/admin/admin-register.vue'
+import  Ahp from '../views/admin/admin-ahp.vue'
 import AdminInformation from '../views/admin/admin-information.vue'
 import AdminBegin from "@/views/admin/admin-begin.vue";
 import AdminChoice from "@/views/admin/admin-choice.vue";
+import AdminAhp from "@/views/admin/admin-ahp.vue";
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/home',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/ahp',
+    name: 'AHP',
+    component: Ahp
   },
   {
     path: '/',
@@ -33,6 +40,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/admin/information',
     name: 'AdminInformation',
     component: AdminInformation
+  },
+  {
+    path: '/admin/ahp',
+    name: 'AdminAhp',
+    component: AdminAhp
   },
   {
     path: '/admin/begin',

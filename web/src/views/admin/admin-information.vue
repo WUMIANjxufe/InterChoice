@@ -22,10 +22,10 @@
             <router-link to="/admin/information">填写简历</router-link>
           </a-menu-item>
           <a-menu-item key="choice">
-            <router-link to="/admin/choice">选择导师1</router-link>
+            <router-link to="/admin/ahp">推荐权重设置</router-link>
           </a-menu-item>
           <a-menu-item key="teacher">
-            <router-link to="/admin/teacher">选择导师2</router-link>
+            <router-link to="/admin/choice">选择导师</router-link>
           </a-menu-item>
           <a-menu-item key="4">初选结果</a-menu-item>
         </a-sub-menu>
