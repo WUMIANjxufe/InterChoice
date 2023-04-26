@@ -23,7 +23,9 @@ public class SturesumeService {
         SturesumeExample sturesumeExample = new SturesumeExample();
         List<Sturesume> sturesumeList = sturesumeMapper.selectByExample(sturesumeExample);
         Sturesume sturesume = CopyUtil.copy(req,Sturesume.class);
+        System.out.println("req"+req);
         if(!sturesumeList.contains(sturesume)){
+            System.out.println("sturesume"+sturesume);
             sturesumeMapper.insert(sturesume);
         }else {
             sturesumeMapper.updateByPrimaryKey(sturesume);

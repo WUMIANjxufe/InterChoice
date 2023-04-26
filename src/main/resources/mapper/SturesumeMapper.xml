@@ -7,7 +7,7 @@
     <result column="rank" jdbcType="VARCHAR" property="rank" />
     <result column="cet4" jdbcType="VARCHAR" property="cet4" />
     <result column="cet6" jdbcType="VARCHAR" property="cet6" />
-    <result column="Interested_direction" jdbcType="VARCHAR" property="interestedDirection" />
+    <result column="interestedDirection" jdbcType="VARCHAR" property="interestedDirection" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    `name`, `status`, `rank`, cet4, cet6, Interested_direction
+    `name`, `status`, `rank`, cet4, cet6, interestedDirection
   </sql>
   <select id="selectByExample" parameterType="com.ydlab.interchoice.domain.SturesumeExample" resultMap="BaseResultMap">
     select
@@ -102,7 +102,7 @@
   </delete>
   <insert id="insert" parameterType="com.ydlab.interchoice.domain.Sturesume">
     insert into sturesume (`name`, `status`, `rank`, 
-      cet4, cet6, Interested_direction
+      cet4, cet6, interestedDirection
       )
     values (#{name,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{rank,jdbcType=VARCHAR}, 
       #{cet4,jdbcType=VARCHAR}, #{cet6,jdbcType=VARCHAR}, #{interestedDirection,jdbcType=VARCHAR}
@@ -127,7 +127,7 @@
         cet6,
       </if>
       <if test="interestedDirection != null">
-        Interested_direction,
+        interestedDirection,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -176,7 +176,7 @@
         cet6 = #{record.cet6,jdbcType=VARCHAR},
       </if>
       <if test="record.interestedDirection != null">
-        Interested_direction = #{record.interestedDirection,jdbcType=VARCHAR},
+        interestedDirection = #{record.interestedDirection,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -190,7 +190,7 @@
       `rank` = #{record.rank,jdbcType=VARCHAR},
       cet4 = #{record.cet4,jdbcType=VARCHAR},
       cet6 = #{record.cet6,jdbcType=VARCHAR},
-      Interested_direction = #{record.interestedDirection,jdbcType=VARCHAR}
+      interestedDirection = #{record.interestedDirection,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -211,7 +211,7 @@
         cet6 = #{cet6,jdbcType=VARCHAR},
       </if>
       <if test="interestedDirection != null">
-        Interested_direction = #{interestedDirection,jdbcType=VARCHAR},
+        interestedDirection = #{interestedDirection,jdbcType=VARCHAR},
       </if>
     </set>
     where `name` = #{name,jdbcType=VARCHAR}
@@ -222,7 +222,7 @@
       `rank` = #{rank,jdbcType=VARCHAR},
       cet4 = #{cet4,jdbcType=VARCHAR},
       cet6 = #{cet6,jdbcType=VARCHAR},
-      Interested_direction = #{interestedDirection,jdbcType=VARCHAR}
+      interestedDirection = #{interestedDirection,jdbcType=VARCHAR}
     where `name` = #{name,jdbcType=VARCHAR}
   </update>
 </mapper>

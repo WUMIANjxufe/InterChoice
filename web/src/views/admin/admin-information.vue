@@ -91,11 +91,11 @@
               <a-radio value="2">未通过</a-radio>
             </a-radio-group>
           </a-form-item>
-          <a-form-item label="兴趣方向" name="Interested_direction">
-            <a-checkbox-group v-model:value="formState.Interested_direction">
-              <a-checkbox value="1" name="Interested_direction" style="margin-left: 10px">机器学习</a-checkbox>
-              <a-checkbox value="2" name="Interested_direction" style="margin-left: 10px">数据挖掘</a-checkbox>
-              <a-checkbox value="3" name="Interested_direction" style="margin-left: 10px">自然语言处理</a-checkbox>
+          <a-form-item label="兴趣方向" name="interestedDirection">
+            <a-checkbox-group v-model:value="str">
+              <a-checkbox value="1" name="interestedDirection" style="margin-left: 10px">机器学习</a-checkbox>
+              <a-checkbox value="2" name="interestedDirection" style="margin-left: 10px">数据挖掘</a-checkbox>
+              <a-checkbox value="3" name="interestedDirection" style="margin-left: 10px">自然语言处理</a-checkbox>
             </a-checkbox-group>
           </a-form-item>
           <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
@@ -120,7 +120,7 @@ interface FormState {
   cet4:string;
   cet6:string;
   rank:string;
-  Interested_direction: string[];
+  interestedDirection: string[];
 }
 export default defineComponent({
   setup() {
@@ -129,9 +129,9 @@ export default defineComponent({
       visible.value = true;
     };
     const formRef = ref();
-    const formState = ref({
+    const formState =  ref({
       name: '',
-      Interested_direction: [],
+      interestedDirection: '',
       age:'',
       sex:'',
       cet4:'',
@@ -139,6 +139,7 @@ export default defineComponent({
       status:'',
       rank:''
     });
+    const str = ref([]);
     const rules = {
       name: [
         { required: true, message: '输入你的名字', trigger: 'blur' },
@@ -150,7 +151,7 @@ export default defineComponent({
       cet4: [{ required: true, message: '四级是否通过', trigger: 'change' }],
       cet6: [{ required: true, message: '六级是否通过', trigger: 'change' }],
       rank: [{ required: true, message: '选择你的成绩排名', trigger: 'change' }],
-      Interested_direction: [
+      str: [
         {
           type: 'array',
           required: true,
@@ -167,6 +168,7 @@ export default defineComponent({
       formRef.value
           .validate()
           .then(() => {
+            formState.value.interestedDirection=str.value.join(',')
                     axios.post("/resume/save",formState.value)
                         .then((response)=>{
                       console.log("resp");
@@ -197,6 +199,7 @@ export default defineComponent({
       state.openKeys = openKeys;
     };
     return {
+      str,
       visible,
       edit,
       formRef,
