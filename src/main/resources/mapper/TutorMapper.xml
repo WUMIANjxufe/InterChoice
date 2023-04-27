@@ -2,16 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ydlab.interchoice.mapper.TutorMapper">
   <resultMap id="BaseResultMap" type="com.ydlab.interchoice.domain.Tutor">
-    <id column="tutor_id" jdbcType="INTEGER" property="tutorId" />
-    <result column="tutor_name" jdbcType="VARCHAR" property="tutorName" />
-    <result column="research_direction" jdbcType="VARCHAR" property="researchDirection" />
-    <result column="tutor_title" jdbcType="VARCHAR" property="tutorTitle" />
-    <result column="student_requirement" jdbcType="INTEGER" property="studentRequirement" />
-    <result column=" educational_background" jdbcType="VARCHAR" property="educationalBackground" />
-    <result column="tutor_duty" jdbcType="VARCHAR" property="tutorDuty" />
-    <result column="tutor_sex" jdbcType="VARCHAR" property="tutorSex" />
-    <result column="tutor_age" jdbcType="INTEGER" property="tutorAge" />
-    <result column="favorate_character" jdbcType="VARCHAR" property="favorateCharacter" />
+    <id column="tutorId" jdbcType="INTEGER" property="tutorid" />
+    <result column="tutorName" jdbcType="VARCHAR" property="tutorname" />
+    <result column="researchDirection" jdbcType="VARCHAR" property="researchdirection" />
+    <result column="tutorTitle" jdbcType="VARCHAR" property="tutortitle" />
+    <result column="studentRequirement" jdbcType="INTEGER" property="studentrequirement" />
+    <result column=" educationalBackground" jdbcType="VARCHAR" property="educationalbackground" />
+    <result column="tutorDuty" jdbcType="VARCHAR" property="tutorduty" />
+    <result column="tutorSex" jdbcType="VARCHAR" property="tutorsex" />
+    <result column="tutorAge" jdbcType="INTEGER" property="tutorage" />
+    <result column="cultivationModel" jdbcType="VARCHAR" property="cultivationmodel" />
+    <result column="thesis" jdbcType="VARCHAR" property="thesis" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -72,8 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    tutor_id, tutor_name, research_direction, tutor_title, student_requirement, ` educational_background`, 
-    tutor_duty, tutor_sex, tutor_age, favorate_character
+    tutorId, tutorName, researchDirection, tutorTitle, studentRequirement, ` educationalBackground`, 
+    tutorDuty, tutorSex, tutorAge, cultivationModel, thesis
   </sql>
   <select id="selectByExample" parameterType="com.ydlab.interchoice.domain.TutorExample" resultMap="BaseResultMap">
     select
@@ -93,11 +94,11 @@
     select 
     <include refid="Base_Column_List" />
     from tutor
-    where tutor_id = #{tutorId,jdbcType=INTEGER}
+    where tutorId = #{tutorid,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tutor
-    where tutor_id = #{tutorId,jdbcType=INTEGER}
+    where tutorId = #{tutorid,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.ydlab.interchoice.domain.TutorExample">
     delete from tutor
@@ -106,79 +107,85 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.ydlab.interchoice.domain.Tutor">
-    insert into tutor (tutor_id, tutor_name, research_direction, 
-      tutor_title, student_requirement, ` educational_background`, 
-      tutor_duty, tutor_sex, tutor_age, 
-      favorate_character)
-    values (#{tutorId,jdbcType=INTEGER}, #{tutorName,jdbcType=VARCHAR}, #{researchDirection,jdbcType=VARCHAR}, 
-      #{tutorTitle,jdbcType=VARCHAR}, #{studentRequirement,jdbcType=INTEGER}, #{educationalBackground,jdbcType=VARCHAR}, 
-      #{tutorDuty,jdbcType=VARCHAR}, #{tutorSex,jdbcType=VARCHAR}, #{tutorAge,jdbcType=INTEGER}, 
-      #{favorateCharacter,jdbcType=VARCHAR})
+    insert into tutor (tutorId, tutorName, researchDirection, 
+      tutorTitle, studentRequirement, ` educationalBackground`, 
+      tutorDuty, tutorSex, tutorAge, 
+      cultivationModel, thesis)
+    values (#{tutorid,jdbcType=INTEGER}, #{tutorname,jdbcType=VARCHAR}, #{researchdirection,jdbcType=VARCHAR}, 
+      #{tutortitle,jdbcType=VARCHAR}, #{studentrequirement,jdbcType=INTEGER}, #{educationalbackground,jdbcType=VARCHAR}, 
+      #{tutorduty,jdbcType=VARCHAR}, #{tutorsex,jdbcType=VARCHAR}, #{tutorage,jdbcType=INTEGER}, 
+      #{cultivationmodel,jdbcType=VARCHAR}, #{thesis,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ydlab.interchoice.domain.Tutor">
     insert into tutor
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="tutorId != null">
-        tutor_id,
+      <if test="tutorid != null">
+        tutorId,
       </if>
-      <if test="tutorName != null">
-        tutor_name,
+      <if test="tutorname != null">
+        tutorName,
       </if>
-      <if test="researchDirection != null">
-        research_direction,
+      <if test="researchdirection != null">
+        researchDirection,
       </if>
-      <if test="tutorTitle != null">
-        tutor_title,
+      <if test="tutortitle != null">
+        tutorTitle,
       </if>
-      <if test="studentRequirement != null">
-        student_requirement,
+      <if test="studentrequirement != null">
+        studentRequirement,
       </if>
-      <if test="educationalBackground != null">
-        ` educational_background`,
+      <if test="educationalbackground != null">
+        ` educationalBackground`,
       </if>
-      <if test="tutorDuty != null">
-        tutor_duty,
+      <if test="tutorduty != null">
+        tutorDuty,
       </if>
-      <if test="tutorSex != null">
-        tutor_sex,
+      <if test="tutorsex != null">
+        tutorSex,
       </if>
-      <if test="tutorAge != null">
-        tutor_age,
+      <if test="tutorage != null">
+        tutorAge,
       </if>
-      <if test="favorateCharacter != null">
-        favorate_character,
+      <if test="cultivationmodel != null">
+        cultivationModel,
+      </if>
+      <if test="thesis != null">
+        thesis,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="tutorId != null">
-        #{tutorId,jdbcType=INTEGER},
+      <if test="tutorid != null">
+        #{tutorid,jdbcType=INTEGER},
       </if>
-      <if test="tutorName != null">
-        #{tutorName,jdbcType=VARCHAR},
+      <if test="tutorname != null">
+        #{tutorname,jdbcType=VARCHAR},
       </if>
-      <if test="researchDirection != null">
-        #{researchDirection,jdbcType=VARCHAR},
+      <if test="researchdirection != null">
+        #{researchdirection,jdbcType=VARCHAR},
       </if>
-      <if test="tutorTitle != null">
-        #{tutorTitle,jdbcType=VARCHAR},
+      <if test="tutortitle != null">
+        #{tutortitle,jdbcType=VARCHAR},
       </if>
-      <if test="studentRequirement != null">
-        #{studentRequirement,jdbcType=INTEGER},
+      <if test="studentrequirement != null">
+        #{studentrequirement,jdbcType=INTEGER},
       </if>
-      <if test="educationalBackground != null">
-        #{educationalBackground,jdbcType=VARCHAR},
+      <if test="educationalbackground != null">
+        #{educationalbackground,jdbcType=VARCHAR},
       </if>
-      <if test="tutorDuty != null">
-        #{tutorDuty,jdbcType=VARCHAR},
+      <if test="tutorduty != null">
+        #{tutorduty,jdbcType=VARCHAR},
       </if>
-      <if test="tutorSex != null">
-        #{tutorSex,jdbcType=VARCHAR},
+      <if test="tutorsex != null">
+        #{tutorsex,jdbcType=VARCHAR},
       </if>
-      <if test="tutorAge != null">
-        #{tutorAge,jdbcType=INTEGER},
+      <if test="tutorage != null">
+        #{tutorage,jdbcType=INTEGER},
       </if>
-      <if test="favorateCharacter != null">
-        #{favorateCharacter,jdbcType=VARCHAR},
+      <if test="cultivationmodel != null">
+        #{cultivationmodel,jdbcType=VARCHAR},
+      </if>
+      <if test="thesis != null">
+        #{thesis,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -188,41 +195,41 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <select id="selectAll" resultType="com.ydlab.interchoice.domain.Tutor">
-    select * from tutor
-  </select>
   <update id="updateByExampleSelective" parameterType="map">
     update tutor
     <set>
-      <if test="record.tutorId != null">
-        tutor_id = #{record.tutorId,jdbcType=INTEGER},
+      <if test="record.tutorid != null">
+        tutorId = #{record.tutorid,jdbcType=INTEGER},
       </if>
-      <if test="record.tutorName != null">
-        tutor_name = #{record.tutorName,jdbcType=VARCHAR},
+      <if test="record.tutorname != null">
+        tutorName = #{record.tutorname,jdbcType=VARCHAR},
       </if>
-      <if test="record.researchDirection != null">
-        research_direction = #{record.researchDirection,jdbcType=VARCHAR},
+      <if test="record.researchdirection != null">
+        researchDirection = #{record.researchdirection,jdbcType=VARCHAR},
       </if>
-      <if test="record.tutorTitle != null">
-        tutor_title = #{record.tutorTitle,jdbcType=VARCHAR},
+      <if test="record.tutortitle != null">
+        tutorTitle = #{record.tutortitle,jdbcType=VARCHAR},
       </if>
-      <if test="record.studentRequirement != null">
-        student_requirement = #{record.studentRequirement,jdbcType=INTEGER},
+      <if test="record.studentrequirement != null">
+        studentRequirement = #{record.studentrequirement,jdbcType=INTEGER},
       </if>
-      <if test="record.educationalBackground != null">
-        ` educational_background` = #{record.educationalBackground,jdbcType=VARCHAR},
+      <if test="record.educationalbackground != null">
+        ` educationalBackground` = #{record.educationalbackground,jdbcType=VARCHAR},
       </if>
-      <if test="record.tutorDuty != null">
-        tutor_duty = #{record.tutorDuty,jdbcType=VARCHAR},
+      <if test="record.tutorduty != null">
+        tutorDuty = #{record.tutorduty,jdbcType=VARCHAR},
       </if>
-      <if test="record.tutorSex != null">
-        tutor_sex = #{record.tutorSex,jdbcType=VARCHAR},
+      <if test="record.tutorsex != null">
+        tutorSex = #{record.tutorsex,jdbcType=VARCHAR},
       </if>
-      <if test="record.tutorAge != null">
-        tutor_age = #{record.tutorAge,jdbcType=INTEGER},
+      <if test="record.tutorage != null">
+        tutorAge = #{record.tutorage,jdbcType=INTEGER},
       </if>
-      <if test="record.favorateCharacter != null">
-        favorate_character = #{record.favorateCharacter,jdbcType=VARCHAR},
+      <if test="record.cultivationmodel != null">
+        cultivationModel = #{record.cultivationmodel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.thesis != null">
+        thesis = #{record.thesis,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -231,16 +238,17 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update tutor
-    set tutor_id = #{record.tutorId,jdbcType=INTEGER},
-      tutor_name = #{record.tutorName,jdbcType=VARCHAR},
-      research_direction = #{record.researchDirection,jdbcType=VARCHAR},
-      tutor_title = #{record.tutorTitle,jdbcType=VARCHAR},
-      student_requirement = #{record.studentRequirement,jdbcType=INTEGER},
-      ` educational_background` = #{record.educationalBackground,jdbcType=VARCHAR},
-      tutor_duty = #{record.tutorDuty,jdbcType=VARCHAR},
-      tutor_sex = #{record.tutorSex,jdbcType=VARCHAR},
-      tutor_age = #{record.tutorAge,jdbcType=INTEGER},
-      favorate_character = #{record.favorateCharacter,jdbcType=VARCHAR}
+    set tutorId = #{record.tutorid,jdbcType=INTEGER},
+      tutorName = #{record.tutorname,jdbcType=VARCHAR},
+      researchDirection = #{record.researchdirection,jdbcType=VARCHAR},
+      tutorTitle = #{record.tutortitle,jdbcType=VARCHAR},
+      studentRequirement = #{record.studentrequirement,jdbcType=INTEGER},
+      ` educationalBackground` = #{record.educationalbackground,jdbcType=VARCHAR},
+      tutorDuty = #{record.tutorduty,jdbcType=VARCHAR},
+      tutorSex = #{record.tutorsex,jdbcType=VARCHAR},
+      tutorAge = #{record.tutorage,jdbcType=INTEGER},
+      cultivationModel = #{record.cultivationmodel,jdbcType=VARCHAR},
+      thesis = #{record.thesis,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -248,47 +256,51 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.ydlab.interchoice.domain.Tutor">
     update tutor
     <set>
-      <if test="tutorName != null">
-        tutor_name = #{tutorName,jdbcType=VARCHAR},
+      <if test="tutorname != null">
+        tutorName = #{tutorname,jdbcType=VARCHAR},
       </if>
-      <if test="researchDirection != null">
-        research_direction = #{researchDirection,jdbcType=VARCHAR},
+      <if test="researchdirection != null">
+        researchDirection = #{researchdirection,jdbcType=VARCHAR},
       </if>
-      <if test="tutorTitle != null">
-        tutor_title = #{tutorTitle,jdbcType=VARCHAR},
+      <if test="tutortitle != null">
+        tutorTitle = #{tutortitle,jdbcType=VARCHAR},
       </if>
-      <if test="studentRequirement != null">
-        student_requirement = #{studentRequirement,jdbcType=INTEGER},
+      <if test="studentrequirement != null">
+        studentRequirement = #{studentrequirement,jdbcType=INTEGER},
       </if>
-      <if test="educationalBackground != null">
-        ` educational_background` = #{educationalBackground,jdbcType=VARCHAR},
+      <if test="educationalbackground != null">
+        ` educationalBackground` = #{educationalbackground,jdbcType=VARCHAR},
       </if>
-      <if test="tutorDuty != null">
-        tutor_duty = #{tutorDuty,jdbcType=VARCHAR},
+      <if test="tutorduty != null">
+        tutorDuty = #{tutorduty,jdbcType=VARCHAR},
       </if>
-      <if test="tutorSex != null">
-        tutor_sex = #{tutorSex,jdbcType=VARCHAR},
+      <if test="tutorsex != null">
+        tutorSex = #{tutorsex,jdbcType=VARCHAR},
       </if>
-      <if test="tutorAge != null">
-        tutor_age = #{tutorAge,jdbcType=INTEGER},
+      <if test="tutorage != null">
+        tutorAge = #{tutorage,jdbcType=INTEGER},
       </if>
-      <if test="favorateCharacter != null">
-        favorate_character = #{favorateCharacter,jdbcType=VARCHAR},
+      <if test="cultivationmodel != null">
+        cultivationModel = #{cultivationmodel,jdbcType=VARCHAR},
+      </if>
+      <if test="thesis != null">
+        thesis = #{thesis,jdbcType=VARCHAR},
       </if>
     </set>
-    where tutor_id = #{tutorId,jdbcType=INTEGER}
+    where tutorId = #{tutorid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ydlab.interchoice.domain.Tutor">
     update tutor
-    set tutor_name = #{tutorName,jdbcType=VARCHAR},
-      research_direction = #{researchDirection,jdbcType=VARCHAR},
-      tutor_title = #{tutorTitle,jdbcType=VARCHAR},
-      student_requirement = #{studentRequirement,jdbcType=INTEGER},
-      ` educational_background` = #{educationalBackground,jdbcType=VARCHAR},
-      tutor_duty = #{tutorDuty,jdbcType=VARCHAR},
-      tutor_sex = #{tutorSex,jdbcType=VARCHAR},
-      tutor_age = #{tutorAge,jdbcType=INTEGER},
-      favorate_character = #{favorateCharacter,jdbcType=VARCHAR}
-    where tutor_id = #{tutorId,jdbcType=INTEGER}
+    set tutorName = #{tutorname,jdbcType=VARCHAR},
+      researchDirection = #{researchdirection,jdbcType=VARCHAR},
+      tutorTitle = #{tutortitle,jdbcType=VARCHAR},
+      studentRequirement = #{studentrequirement,jdbcType=INTEGER},
+      ` educationalBackground` = #{educationalbackground,jdbcType=VARCHAR},
+      tutorDuty = #{tutorduty,jdbcType=VARCHAR},
+      tutorSex = #{tutorsex,jdbcType=VARCHAR},
+      tutorAge = #{tutorage,jdbcType=INTEGER},
+      cultivationModel = #{cultivationmodel,jdbcType=VARCHAR},
+      thesis = #{thesis,jdbcType=VARCHAR}
+    where tutorId = #{tutorid,jdbcType=INTEGER}
   </update>
 </mapper>

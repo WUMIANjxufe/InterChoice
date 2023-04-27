@@ -1,89 +1,115 @@
 package com.ydlab.interchoice.resp;
 
 public class TutorResp {
-    private Integer tutorId;
+    private Integer tutorid;
 
-    private String tutorName;
+    private String tutorname;
 
-    private String researchDirection;
+    private String researchdirection;
 
-    private String tutorTitle;
+    private String tutortitle;
 
-    private String educationalBackground;
+    private Integer studentrequirement;
 
-    private String tutorDuty;
+    private String educationalbackground;
 
-    private String tutorSex;
+    private String tutorduty;
 
-    private Integer tutorAge;
+    private String tutorsex;
 
+    private Integer tutorage;
 
+    private String cultivationmodel;
 
-    public Integer getTutorId() {
-        return tutorId;
+    private String thesis;
+
+    public Integer getTutorid() {
+        return tutorid;
     }
 
-    public void setTutorId(Integer tutorId) {
-        this.tutorId = tutorId;
+    public void setTutorid(Integer tutorid) {
+        this.tutorid = tutorid;
     }
 
-    public String getTutorName() {
-        return tutorName;
+    public String getTutorname() {
+        return tutorname;
     }
 
-    public void setTutorName(String tutorName) {
-        this.tutorName = tutorName;
+    public void setTutorname(String tutorname) {
+        this.tutorname = tutorname;
     }
 
-    public String getResearchDirection() {
-        return researchDirection;
+    public String getResearchdirection() {
+        return researchdirection;
     }
 
-    public void setResearchDirection(String researchDirection) {
-        this.researchDirection = researchDirection;
+    public void setResearchdirection(String researchdirection) {
+        this.researchdirection = researchdirection;
     }
 
-    public String getTutorTitle() {
-        return tutorTitle;
+    public String getTutortitle() {
+        return tutortitle;
     }
 
-    public void setTutorTitle(String tutorTitle) {
-        this.tutorTitle = tutorTitle;
+    public void setTutortitle(String tutortitle) {
+        this.tutortitle = tutortitle;
     }
 
-
-    public String getEducationalBackground() {
-        return educationalBackground;
+    public Integer getStudentrequirement() {
+        return studentrequirement;
     }
 
-    public void setEducationalBackground(String educationalBackground) {
-        this.educationalBackground = educationalBackground;
+    public void setStudentrequirement(Integer studentrequirement) {
+        this.studentrequirement = studentrequirement;
     }
 
-    public String getTutorDuty() {
-        return tutorDuty;
+    public String getEducationalbackground() {
+        return educationalbackground;
     }
 
-    public void setTutorDuty(String tutorDuty) {
-        this.tutorDuty = tutorDuty;
+    public void setEducationalbackground(String educationalbackground) {
+        this.educationalbackground = educationalbackground;
     }
 
-    public String getTutorSex() {
-        return tutorSex;
+    public String getTutorduty() {
+        return tutorduty;
     }
 
-    public void setTutorSex(String tutorSex) {
-        this.tutorSex = tutorSex;
+    public void setTutorduty(String tutorduty) {
+        this.tutorduty = tutorduty;
     }
 
-    public Integer getTutorAge() {
-        return tutorAge;
+    public String getTutorsex() {
+        return tutorsex;
     }
 
-    public void setTutorAge(Integer tutorAge) {
-        this.tutorAge = tutorAge;
+    public void setTutorsex(String tutorsex) {
+        this.tutorsex = tutorsex;
     }
 
+    public Integer getTutorage() {
+        return tutorage;
+    }
+
+    public void setTutorage(Integer tutorage) {
+        this.tutorage = tutorage;
+    }
+
+    public String getCultivationmodel() {
+        return cultivationmodel;
+    }
+
+    public void setCultivationmodel(String cultivationmodel) {
+        this.cultivationmodel = cultivationmodel;
+    }
+
+    public String getThesis() {
+        return thesis;
+    }
+
+    public void setThesis(String thesis) {
+        this.thesis = thesis;
+    }
 
     @Override
     public String toString() {
@@ -91,14 +117,17 @@ public class TutorResp {
         sb.append(getClass().getSimpleName());
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
-        sb.append(", tutorId=").append(tutorId);
-        sb.append(", tutorName=").append(tutorName);
-        sb.append(", researchDirection=").append(researchDirection);
-        sb.append(", tutorTitle=").append(tutorTitle);
-        sb.append(", educationalBackground=").append(educationalBackground);
-        sb.append(", tutorDuty=").append(tutorDuty);
-        sb.append(", tutorSex=").append(tutorSex);
-        sb.append(", tutorAge=").append(tutorAge);
+        sb.append(", tutorid=").append(tutorid);
+        sb.append(", tutorname=").append(tutorname);
+        sb.append(", researchdirection=").append(researchdirection);
+        sb.append(", tutortitle=").append(tutortitle);
+        sb.append(", studentrequirement=").append(studentrequirement);
+        sb.append(", educationalbackground=").append(educationalbackground);
+        sb.append(", tutorduty=").append(tutorduty);
+        sb.append(", tutorsex=").append(tutorsex);
+        sb.append(", tutorage=").append(tutorage);
+        sb.append(", cultivationmodel=").append(cultivationmodel);
+        sb.append(", thesis=").append(thesis);
         sb.append("]");
         return sb.toString();
     }
