@@ -1,6 +1,6 @@
 <template>
   <a-layout-footer style="text-align: center">
-    师生双选虚拟仿真实验平台，欢迎{{user.studentName}}
+    师生双选虚拟仿真实验平台<span v-show="user.studentId">，欢迎{{user.studentName}}</span>
   </a-layout-footer>
 </template>
 <script lang="ts">

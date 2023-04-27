@@ -17,12 +17,12 @@
     cancel-text="否"
     @confirm="logout()"
     >
-      <a class="login-menu">
-        <a-button type="primary">退出登录</a-button>
+      <a class="login-menu" >
+        <a-button type="primary" v-show="user.studentId">退出登录</a-button>
       </a>
     </a-popconfirm>
-    <a class="login-menu">
-      {{user.studentName}}
+    <a class="login-menu" v-show="user.studentId">
+    <span>您好：{{user.studentName}}</span>
     </a>
   </a-layout-header>
 </template>

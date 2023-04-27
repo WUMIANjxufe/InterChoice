@@ -5,7 +5,7 @@
           mode="inline"
           v-model:selectedKeys="selectedKeys"
           v-model:openKeys="openKeys"
-          @openChange="onOpenChange"
+          @openChange="onOpen"
           style="height: 100%"
       >
         <a-sub-menu key="sub1">
@@ -92,7 +92,7 @@
             </a-radio-group>
           </a-form-item>
           <a-form-item label="兴趣方向" name="interestedDirection">
-            <a-checkbox-group v-model:value="str">
+            <a-checkbox-group v-model:value="interestArray">
               <a-checkbox value="1" name="interestedDirection" style="margin-left: 10px">机器学习</a-checkbox>
               <a-checkbox value="2" name="interestedDirection" style="margin-left: 10px">数据挖掘</a-checkbox>
               <a-checkbox value="3" name="interestedDirection" style="margin-left: 10px">自然语言处理</a-checkbox>
@@ -139,7 +139,7 @@ export default defineComponent({
       status:'',
       rank:''
     });
-    const str = ref([]);
+    const interestArray = ref([]);
     const rules = {
       name: [
         { required: true, message: '输入你的名字', trigger: 'blur' },
@@ -151,7 +151,7 @@ export default defineComponent({
       cet4: [{ required: true, message: '四级是否通过', trigger: 'change' }],
       cet6: [{ required: true, message: '六级是否通过', trigger: 'change' }],
       rank: [{ required: true, message: '选择你的成绩排名', trigger: 'change' }],
-      str: [
+      interestArray: [
         {
           type: 'array',
           required: true,
@@ -168,7 +168,7 @@ export default defineComponent({
       formRef.value
           .validate()
           .then(() => {
-            formState.value.interestedDirection=str.value.join(',')
+            formState.value.interestedDirection=interestArray.value.toString()
                     axios.post("/resume/save",formState.value)
                         .then((response)=>{
                       console.log("resp");
@@ -195,11 +195,11 @@ export default defineComponent({
       openKeys: ['sub1'],
       selectedKeys: [],
     });
-    const onOpenChange = (openKeys: string[]) => {
+    const onOpen = (openKeys: string[]) => {
       state.openKeys = openKeys;
     };
     return {
-      str,
+      interestArray,
       visible,
       edit,
       formRef,
@@ -211,7 +211,7 @@ export default defineComponent({
       onSubmit,
       resetForm,
       ...toRefs(state),
-      onOpenChange,
+      onOpen,
     };
   },
 });
