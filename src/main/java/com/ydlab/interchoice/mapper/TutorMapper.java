@@ -27,4 +27,5 @@ public interface TutorMapper {
     int updateByPrimaryKeySelective(Tutor record);
 
     int updateByPrimaryKey(Tutor record);
+    public List<Tutor> selectAll();
 }

@@ -434,73 +434,73 @@ public class TutorExample {
             return (Criteria) this;
         }
 
-        public Criteria andEducationalbackgroundIsNull() {
-            addCriterion("` educationalBackground` is null");
+        public Criteria andEdubackgroundIsNull() {
+            addCriterion("` eduBackground` is null");
             return (Criteria) this;
         }
 
-        public Criteria andEducationalbackgroundIsNotNull() {
-            addCriterion("` educationalBackground` is not null");
+        public Criteria andEdubackgroundIsNotNull() {
+            addCriterion("` eduBackground` is not null");
             return (Criteria) this;
         }
 
-        public Criteria andEducationalbackgroundEqualTo(String value) {
-            addCriterion("` educationalBackground` =", value, "educationalbackground");
+        public Criteria andEdubackgroundEqualTo(String value) {
+            addCriterion("` eduBackground` =", value, "edubackground");
             return (Criteria) this;
         }
 
-        public Criteria andEducationalbackgroundNotEqualTo(String value) {
-            addCriterion("` educationalBackground` <>", value, "educationalbackground");
+        public Criteria andEdubackgroundNotEqualTo(String value) {
+            addCriterion("` eduBackground` <>", value, "edubackground");
             return (Criteria) this;
         }
 
-        public Criteria andEducationalbackgroundGreaterThan(String value) {
-            addCriterion("` educationalBackground` >", value, "educationalbackground");
+        public Criteria andEdubackgroundGreaterThan(String value) {
+            addCriterion("` eduBackground` >", value, "edubackground");
             return (Criteria) this;
         }
 
-        public Criteria andEducationalbackgroundGreaterThanOrEqualTo(String value) {
-            addCriterion("` educationalBackground` >=", value, "educationalbackground");
+        public Criteria andEdubackgroundGreaterThanOrEqualTo(String value) {
+            addCriterion("` eduBackground` >=", value, "edubackground");
             return (Criteria) this;
         }
 
-        public Criteria andEducationalbackgroundLessThan(String value) {
-            addCriterion("` educationalBackground` <", value, "educationalbackground");
+        public Criteria andEdubackgroundLessThan(String value) {
+            addCriterion("` eduBackground` <", value, "edubackground");
             return (Criteria) this;
         }
 
-        public Criteria andEducationalbackgroundLessThanOrEqualTo(String value) {
-            addCriterion("` educationalBackground` <=", value, "educationalbackground");
+        public Criteria andEdubackgroundLessThanOrEqualTo(String value) {
+            addCriterion("` eduBackground` <=", value, "edubackground");
             return (Criteria) this;
         }
 
-        public Criteria andEducationalbackgroundLike(String value) {
-            addCriterion("` educationalBackground` like", value, "educationalbackground");
+        public Criteria andEdubackgroundLike(String value) {
+            addCriterion("` eduBackground` like", value, "edubackground");
             return (Criteria) this;
         }
 
-        public Criteria andEducationalbackgroundNotLike(String value) {
-            addCriterion("` educationalBackground` not like", value, "educationalbackground");
+        public Criteria andEdubackgroundNotLike(String value) {
+            addCriterion("` eduBackground` not like", value, "edubackground");
             return (Criteria) this;
         }
 
-        public Criteria andEducationalbackgroundIn(List<String> values) {
-            addCriterion("` educationalBackground` in", values, "educationalbackground");
+        public Criteria andEdubackgroundIn(List<String> values) {
+            addCriterion("` eduBackground` in", values, "edubackground");
             return (Criteria) this;
         }
 
-        public Criteria andEducationalbackgroundNotIn(List<String> values) {
-            addCriterion("` educationalBackground` not in", values, "educationalbackground");
+        public Criteria andEdubackgroundNotIn(List<String> values) {
+            addCriterion("` eduBackground` not in", values, "edubackground");
             return (Criteria) this;
         }
 
-        public Criteria andEducationalbackgroundBetween(String value1, String value2) {
-            addCriterion("` educationalBackground` between", value1, value2, "educationalbackground");
+        public Criteria andEdubackgroundBetween(String value1, String value2) {
+            addCriterion("` eduBackground` between", value1, value2, "edubackground");
             return (Criteria) this;
         }
 
-        public Criteria andEducationalbackgroundNotBetween(String value1, String value2) {
-            addCriterion("` educationalBackground` not between", value1, value2, "educationalbackground");
+        public Criteria andEdubackgroundNotBetween(String value1, String value2) {
+            addCriterion("` eduBackground` not between", value1, value2, "edubackground");
             return (Criteria) this;
         }
 

@@ -33,6 +33,7 @@ export default defineComponent({
       console.log("data"+data)
       axios.post("http://localhost:8880/login",data).then(res=>{
            console.log("restoken"+res.data.content.token)
+           console.log(res.data.content.studentId)
             if(res.data.content.password!=null){
               console.log("登录成功，页面跳转")
               store.commit("setUser",res.data.content)

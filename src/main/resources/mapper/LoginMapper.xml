@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ydlab.interchoice.mapper.LoginMapper">
   <resultMap id="BaseResultMap" type="com.ydlab.interchoice.domain.Login">
-    <id column="student_id" jdbcType="INTEGER" property="studentId" />
-    <result column="student_name" jdbcType="VARCHAR" property="studentName" />
+    <id column="studentId" jdbcType="INTEGER" property="studentId" />
+    <result column="studentName" jdbcType="VARCHAR" property="studentName" />
     <result column="password" jdbcType="VARCHAR" property="password" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -65,7 +65,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    student_id, student_name, `password`
+    studentId, studentName, `password`
   </sql>
   <select id="selectByExample" parameterType="com.ydlab.interchoice.domain.LoginExample" resultMap="BaseResultMap">
     select
@@ -85,11 +85,11 @@
     select 
     <include refid="Base_Column_List" />
     from login
-    where student_id = #{studentId,jdbcType=INTEGER}
+    where studentId = #{studentId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from login
-    where student_id = #{studentId,jdbcType=INTEGER}
+    where studentId = #{studentId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.ydlab.interchoice.domain.LoginExample">
     delete from login
@@ -98,7 +98,7 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.ydlab.interchoice.domain.Login">
-    insert into login (student_id, student_name, `password`
+    insert into login (studentId, studentName, `password`
       )
     values (#{studentId,jdbcType=INTEGER}, #{studentName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}
       )
@@ -107,10 +107,10 @@
     insert into login
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="studentId != null">
-        student_id,
+        studentId,
       </if>
       <if test="studentName != null">
-        student_name,
+        studentName,
       </if>
       <if test="password != null">
         `password`,
@@ -139,10 +139,10 @@
     update login
     <set>
       <if test="record.studentId != null">
-        student_id = #{record.studentId,jdbcType=INTEGER},
+        studentId = #{record.studentId,jdbcType=INTEGER},
       </if>
       <if test="record.studentName != null">
-        student_name = #{record.studentName,jdbcType=VARCHAR},
+        studentName = #{record.studentName,jdbcType=VARCHAR},
       </if>
       <if test="record.password != null">
         `password` = #{record.password,jdbcType=VARCHAR},
@@ -154,8 +154,8 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update login
-    set student_id = #{record.studentId,jdbcType=INTEGER},
-      student_name = #{record.studentName,jdbcType=VARCHAR},
+    set studentId = #{record.studentId,jdbcType=INTEGER},
+      studentName = #{record.studentName,jdbcType=VARCHAR},
       `password` = #{record.password,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -165,18 +165,18 @@
     update login
     <set>
       <if test="studentName != null">
-        student_name = #{studentName,jdbcType=VARCHAR},
+        studentName = #{studentName,jdbcType=VARCHAR},
       </if>
       <if test="password != null">
         `password` = #{password,jdbcType=VARCHAR},
       </if>
     </set>
-    where student_id = #{studentId,jdbcType=INTEGER}
+    where studentId = #{studentId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ydlab.interchoice.domain.Login">
     update login
-    set student_name = #{studentName,jdbcType=VARCHAR},
+    set studentName = #{studentName,jdbcType=VARCHAR},
       `password` = #{password,jdbcType=VARCHAR}
-    where student_id = #{studentId,jdbcType=INTEGER}
+    where studentId = #{studentId,jdbcType=INTEGER}
   </update>
 </mapper>

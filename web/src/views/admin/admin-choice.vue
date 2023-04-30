@@ -35,21 +35,17 @@
       <p align="center">
         <video src="../../assets/video/3.mp4" id="video3" style="width:50%;height: auto" autoplay controls></video>
       </p>
-      <a-modal v-model:visible="modalvisible"  title="选择导师" @ok="handleModalOk" style="width: 80%">
-        <a-table :columns="columns" :data-source="data" style="width: 100%">
-          <template #name="{ text }">
-            <a>{{ text }}</a>
-          </template>
-          <template #tags="{ text: tags }">
-      <span>
-        <a-tag
-            v-for="tag in tags"
-            :key="tag"
-            :color="tag === 'loser' ? 'volcano' : tag.length > 5 ? 'geekblue' : 'green'"
-        >
-          {{ tag.toUpperCase() }}
-        </a-tag>
-      </span>
+      <a-modal v-model:visible="modalVisible"  title="选择导师" @ok="handleModalOk" style="width: 80%">
+        <a-table
+            :columns="columns"
+            :data-source="data"
+            :row-key="record => record.id"
+            style="width: 100%">
+          <template v-slot:action="{record}">
+          <a-space size="small">
+            <a-button type="primary"  @click="choose(record)">选择</a-button>
+            <a-button type="primary">取消选择</a-button>
+          </a-space>
           </template>
         </a-table>
       </a-modal>
@@ -58,102 +54,86 @@
 </template>
 <script>
 import { SmileOutlined, DownOutlined } from '@ant-design/icons-vue';
-import {defineComponent, onMounted, reactive, ref, toRefs} from 'vue';
+import {computed, defineComponent, onMounted, reactive, ref, toRefs} from 'vue';
+import { message } from 'ant-design-vue';
 import axios from "axios";
+import Qs from "qs";
+import store from "@/store";
+import {useRouter} from "vue-router";
 const columns = [
   {
-    title: '姓名',
-    dataIndex: 'name',
-    key: 'name',
+    title: '导师姓名',
+    dataIndex: 'tutorname',
+    key: 'tutorname',
   },
   {
     title: '年龄',
-    dataIndex: 'age',
-    key: 'age',
-  },
-  {
-    title: '性别',
-    dataIndex: 'address',
-    key: 'address',
+    dataIndex: 'tutorage',
+    key: 'tutorage',
   },
   {
     title: '职称',
-    key: 'tags',
-    dataIndex: 'tags',
-    slots: { customRender: 'tags' },
+    dataIndex: 'tutortitle',
+    key: 'tutortitle',
   },
   {
-    title: '选择',
-    key: 'action'
+    title: '职务',
+    dataIndex: 'tutorduty',
+    key: 'tutorduty'
   },
   {
-    title: '预测成功率',
-    key: 'predict'
+    title: '培养模式',
+    dataIndex: 'cultivationmodel',
+    key: 'cultivationmodel'
+  },
+  {
+    title: '论文',
+    dataIndex: 'thesis',
+    key: 'thesis'
+  },
+  {
+    title: '学生水平要求',
+    dataIndex: 'studentrequirement',
+    key: 'studentrequirement'
+  },
+  {
+    title: '研究方向',
+    dataIndex: 'researchdirection',
+    key: 'researchdirection'
+  },
+  {
+    title: '导师编号',
+    dataIndex: 'tutorid',
+    key: 'tutorid'
+  },
+  {
+    title: '导师性别',
+    dataIndex: 'tutorsex',
+    key: 'tutorsex'
+  },
+  {
+    title: '操作',
+    key: 'action',
+    slots:{customRender : 'action'}
   }
 ];
 
-const data = [
-  {
-    key: '1',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer'],
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    tags: ['loser'],
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  }
-];
+
 export default defineComponent({
+  name: 'choice',
   setup() {
+    const user = computed(()=> store.state.user);
+    const data = ref();
     axios.get("/choice/tutorList").then((res) => {
-      console.log(res.data)
+      console.log(res.data.content)
+      data.value = res.data.content;
     });
-    const modalvisible = ref(false)
+    const modalVisible = ref(false)
     onMounted(() => {
       console.log(222)
       const video3 = document.getElementById("video3")
       video3.addEventListener("ended",() => {
-        modalvisible.value = true;
+        modalVisible.value = true;
       })
     })
     const state = reactive({
@@ -164,9 +144,32 @@ export default defineComponent({
     const onOpenChange = (openKeys) => {
       state.openKeys = openKeys;
     };
+    const router = useRouter()
+    const handleModalOk = () =>{
+      router.push('/admin/result')
+    }
+    const choose = (record) => {
+      console.log(record.tutorname)
+      console.log(record.tutorid)
+      console.log(user.value.studentId)
+      console.log(user.value.studentName)
+      const data = Qs.stringify({"studentname": user.value.studentName,"studentid": user.value.studentId,"tutorid": record.tutorid, "tutorname": record.tutorname});
+      axios.post("/choose",data).then((res => {
+         console.log(res.data.message);
+         message.info(res.data.message);
+      }))
+    }
+    // const update = () => {
+    //   axios.post("/update",data).then((res => {
+    //     console.log(res.data)
+    //   }))
+    // }
+
     return {
+      handleModalOk,
       ...toRefs(state),
-      modalvisible,
+      modalVisible,
+      choose,
       data,
       columns,
       onOpenChange

@@ -51,7 +51,7 @@
             :wrapper-col="wrapperCol"
         >
           <a-form-item ref="name" label="姓名" name="name">
-            <a-input v-model:value="formState.name" />
+           <a-input v-model:value="formState.name" ></a-input>
           </a-form-item>
           <a-form-item ref="name" label="年龄" name="age">
             <a-input v-model:value="formState.age" />
@@ -110,8 +110,9 @@
 <script lang="ts">
 import { ValidateErrorEntity } from 'ant-design-vue/es/form/interface';
 import axios from 'axios';
-import {defineComponent, reactive, ref, toRefs} from 'vue';
+import {computed, defineComponent, reactive, ref, toRefs} from 'vue';
 import { useRouter } from 'vue-router'
+import store from "@/store";
 interface FormState {
   name: string;
   age:string;
@@ -124,13 +125,14 @@ interface FormState {
 }
 export default defineComponent({
   setup() {
+    const user = computed(()=> store.state.user);
     const visible = ref<boolean>(false);
     const edit = () => {
       visible.value = true;
     };
     const formRef = ref();
     const formState =  ref({
-      name: '',
+      name: user.value.studentName,
       interestedDirection: '',
       age:'',
       sex:'',
@@ -199,6 +201,7 @@ export default defineComponent({
       state.openKeys = openKeys;
     };
     return {
+      user,
       interestArray,
       visible,
       edit,

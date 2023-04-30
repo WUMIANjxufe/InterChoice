@@ -7,6 +7,7 @@ import AdminInformation from '../views/admin/admin-information.vue'
 import AdminBegin from "@/views/admin/admin-begin.vue";
 import AdminChoice from "@/views/admin/admin-choice.vue";
 import AdminAhp from "@/views/admin/admin-ahp.vue";
+import AdminResult from "@/views/admin/admin-result.vue";
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/home',
@@ -45,6 +46,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/admin/ahp',
     name: 'AdminAhp',
     component: AdminAhp
+  },
+  {
+    path: '/admin/result',
+    name: 'AdminResult',
+    component: AdminResult
   },
   {
     path: '/admin/begin',

@@ -9,6 +9,15 @@
     "build-prod": "vue-cli-service build --mode prod",
     "lint": "vue-cli-service lint"
   },
+  "rules": {
+    "generator-star-spacing": "off",
+    "no-tabs":"off",
+    "no-unused-vars":"off",
+    "no-console":"off",
+    "no-irregular-whitespace":"off",
+    "no-debugger": "off"
+  },
+
   "dependencies": {
     "@ant-design/icons-vue": "^6.1.0",
     "ant-design-vue": "^3.3.0-beta.4",

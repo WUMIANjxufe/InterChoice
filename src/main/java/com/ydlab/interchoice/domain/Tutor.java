@@ -11,7 +11,7 @@ public class Tutor {
 
     private Integer studentrequirement;
 
-    private String educationalbackground;
+    private String edubackground;
 
     private String tutorduty;
 
@@ -63,12 +63,12 @@ public class Tutor {
         this.studentrequirement = studentrequirement;
     }
 
-    public String getEducationalbackground() {
-        return educationalbackground;
+    public String getEdubackground() {
+        return edubackground;
     }
 
-    public void setEducationalbackground(String educationalbackground) {
-        this.educationalbackground = educationalbackground;
+    public void setEdubackground(String educationalbackground) {
+        this.edubackground = educationalbackground;
     }
 
     public String getTutorduty() {
@@ -122,7 +122,7 @@ public class Tutor {
         sb.append(", researchdirection=").append(researchdirection);
         sb.append(", tutortitle=").append(tutortitle);
         sb.append(", studentrequirement=").append(studentrequirement);
-        sb.append(", educationalbackground=").append(educationalbackground);
+        sb.append(", edubackground=").append(edubackground);
         sb.append(", tutorduty=").append(tutorduty);
         sb.append(", tutorsex=").append(tutorsex);
         sb.append(", tutorage=").append(tutorage);

@@ -1,11 +1,15 @@
 package com.ydlab.interchoice.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.ydlab.interchoice.req.ChooseReq;
 import com.ydlab.interchoice.req.LoginReq;
 import com.ydlab.interchoice.req.RegisterReq;
+import com.ydlab.interchoice.req.UserReq;
 import com.ydlab.interchoice.resp.CommonResp;
 import com.ydlab.interchoice.resp.LoginResp;
+import com.ydlab.interchoice.service.ChooseService;
 import com.ydlab.interchoice.service.LoginService;
+//import com.ydlab.interchoice.service.UserService;
 import com.ydlab.interchoice.util.SnowFlake;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +24,8 @@ import java.util.concurrent.TimeUnit;
 public class UserController {
     @Resource
     private LoginService loginService;
+    @Resource
+    private ChooseService chooseService;
     private static final Logger LOG = LoggerFactory.getLogger(UserController.class);
     @Resource
     private SnowFlake snowFlake;
@@ -55,6 +61,22 @@ public class UserController {
         CommonResp resp = new CommonResp<>();
         String message = loginService.insertUser(req).getMessage();
         System.out.println("message"+message);
+        resp.setMessage(message);
+        return resp;
+    }
+    @ResponseBody
+    @RequestMapping(value = "/choose", method = RequestMethod.POST)
+    public CommonResp choose(ChooseReq  req){
+        CommonResp resp = new CommonResp<>();
+        String message = chooseService.saveTeacher(req).getMessage();
+        resp.setMessage(message);
+        return resp;
+    }
+    @ResponseBody
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public CommonResp update(ChooseReq  req){
+        CommonResp resp = new CommonResp<>();
+        String message = chooseService.updateTeacher(req).getMessage();
         resp.setMessage(message);
         return resp;
     }
