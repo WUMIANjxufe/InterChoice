@@ -129,6 +129,7 @@ const columns = [
 export default defineComponent({
   name: 'choice',
   setup() {
+    store.commit("setNum",false)
     const user = computed(()=> store.state.user);
     const data = ref();
     const tutorName = ref();

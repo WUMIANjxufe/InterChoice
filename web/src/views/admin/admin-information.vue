@@ -130,6 +130,7 @@ interface FormState {
 }
 export default defineComponent({
   setup() {
+    store.commit("setNum",false)
     const user = computed(()=> store.state.user);
     const visible = ref<boolean>(false);
     const edit = () => {

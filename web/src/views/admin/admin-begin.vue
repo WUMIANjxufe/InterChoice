@@ -46,8 +46,10 @@
 <script>
 import {defineComponent, onMounted, reactive, toRefs} from "vue";
 import { useRouter } from 'vue-router'
+import store from "@/store";
 export default defineComponent({
   setup() {
+    store.commit("setNum",false)
     onMounted(() => {
       const router = useRouter()
       console.log(222)

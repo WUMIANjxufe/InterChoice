@@ -41,28 +41,41 @@
         <video src="../../assets/video/4.mp4" id="video4"  style="width:80%;height: auto" autoplay controls></video>
       </p>
       <a-modal v-model:visible="modalVisible"  title="一封来自预选导师的邮件" @ok="handleModalOk" ok-text= "考察开始" style="width: 50%">
-              <p>恭喜你获得加入我的团队的资格，请尽快与我联系，我将对你进行为期一个月的考察，合格后你将正式入门</p>
+              <p>在考察中，你会有一定的精力和金钱去完成各种事情，也会有相应的能力提高，在考察结束后，你的能力到达一定水平，即可正式入门，否则双选失败</p>
       </a-modal>
     </a-layout-content>
   </a-layout>
 </template>
 <script>
-import {defineComponent, onMounted, reactive, ref, toRefs} from "vue";
+import {computed, defineComponent, onMounted, reactive, ref, toRefs} from "vue";
 import { useRouter } from 'vue-router'
 import * as modalVisible from "ant-design-vue/es/color-picker/ColorPicker";
 import axios from "axios";
 import router from "@/router";
+import store from "@/store";
+import Qs from "qs";
 export default defineComponent({
   setup() {
-    const modalVisible = ref(false)
+    const energy = ref();
+    const money = ref();
+    const user = computed(()=> store.state.user);
+    store.commit("setNum",true)
+    const modalVisible = ref(true)
     onMounted(() => {
       const router = useRouter()
       console.log(222)
+      const data = Qs.stringify({"studentname": user.value.studentName,"studentid": user.value.studentId,"energy": 100, "money": 100});
+      axios.post('/inspect',data).then(res=>{
+        console.log(res.data.content)
+        energy.value=res.data.content.energy
+        money.value=res.data.content.money
+        console.log(energy.value)
+        store.commit("setNum",res.data.content)
+      })
       const video1 = document.getElementById("video4")
       document.getElementById("video4").src = require("../../assets/video/4.mp4");
       video1.addEventListener("ended",() => {
         modalVisible.value = true;
-        axios.get()
       })
     })
     const handleModalOk = () =>{
@@ -77,6 +90,9 @@ export default defineComponent({
       state.openKeys = openKeys;
     };
     return {
+      energy,
+      money,
+      user,
       handleModalOk,
       modalVisible,
       ...toRefs(state),

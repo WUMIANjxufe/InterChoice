@@ -52,8 +52,10 @@ import { useRouter } from 'vue-router'
 import * as modalVisible from "ant-design-vue/es/color-picker/ColorPicker";
 import axios from "axios";
 import router from "@/router";
+import store from "@/store";
 export default defineComponent({
   setup() {
+
     const modalVisible = ref(false)
     onMounted(() => {
       const router = useRouter()

@@ -34,8 +34,10 @@ import {defineComponent, reactive, toRefs} from "vue";
 import axios from "axios";
 import Qs from "qs";
 import router from "@/router";
+import store from "@/store";
 export default defineComponent({
   setup() {
+    store.commit("setNum",false)
     const state = reactive({
       "flag1" : true,
       "flag2" : false

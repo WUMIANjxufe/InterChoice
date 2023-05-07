@@ -21,11 +21,11 @@
     <a class="login-menu" v-show="user.studentId">
     <span>您好：{{user.studentName}}</span>
     </a>
-    <a class="login-menu">
-      <span>金钱值为：</span>
+    <a class="login-menu" v-show="num">
+      <span>金钱值为：{{num.money}}</span>
     </a>
-    <a class="login-menu">
-      <span>精力值为：</span>
+    <a class="login-menu" v-show="num">
+      <span>精力值为：{{num.energy}}</span>
     </a>
   </a-layout-header>
 </template>
@@ -40,6 +40,7 @@ export default defineComponent({
   name: 'the-header',
   setup() {
     const user = computed(() => store.state.user);
+    const num = computed(()=> store.state.num);
     const logout = () => {
       console.log("退出登录开始"+user.value);
       axios.get('http://localhost:8880/logout/'+user.value.token).then((response) => {
@@ -47,6 +48,7 @@ export default defineComponent({
         if(data.success){
           message.success("退出登录成功！");
           store.commit("setUser",{});
+          store.commit("setNum",{});
           router.push("/")
         }else {
           message.error(data.message);
@@ -54,6 +56,7 @@ export default defineComponent({
       })
     }
     return {
+      num,
       user,
       logout
     }

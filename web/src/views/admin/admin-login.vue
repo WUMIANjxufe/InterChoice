@@ -25,6 +25,7 @@ import router from "@/router";
 import store from "@/store";
 export default defineComponent({
   setup() {
+    store.commit("setNum",false)
     const login = () => {
       let id = parseInt(document.getElementById("username").value);
       let pd = hexMd5(document.getElementById("password").value);

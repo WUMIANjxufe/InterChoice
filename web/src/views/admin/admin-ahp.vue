@@ -55,6 +55,7 @@ import axios from "axios";
 import {Modal} from "ant-design-vue";
 import AHP from "@/assets/img/AHP.png"
 import router from "@/router";
+import store from "@/store";
 const columns = [
   {
     title: '姓名',
@@ -140,6 +141,7 @@ const data = [
 ];
 export default defineComponent({
   setup() {
+    store.commit("setNum",false)
     axios.get("/choice/tutorList").then((res) => {
       console.log(res.data)
     });

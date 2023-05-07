@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ydlab.interchoice.mapper.NumMapper">
+  <resultMap id="BaseResultMap" type="com.ydlab.interchoice.domain.Num">
+    <id column="studentId" jdbcType="INTEGER" property="studentid" />
+    <result column="studentName" jdbcType="VARCHAR" property="studentname" />
+    <result column="energy" jdbcType="INTEGER" property="energy" />
+    <result column="money" jdbcType="INTEGER" property="money" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    studentId, studentName, energy, money
+  </sql>
+  <select id="selectByExample" parameterType="com.ydlab.interchoice.domain.NumExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from num
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from num
+    where studentId = #{studentid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from num
+    where studentId = #{studentid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ydlab.interchoice.domain.NumExample">
+    delete from num
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ydlab.interchoice.domain.Num">
+    insert into num (studentId, studentName, energy, 
+      money)
+    values (#{studentid,jdbcType=INTEGER}, #{studentname,jdbcType=VARCHAR}, #{energy,jdbcType=INTEGER}, 
+      #{money,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ydlab.interchoice.domain.Num">
+    insert into num
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="studentid != null">
+        studentId,
+      </if>
+      <if test="studentname != null">
+        studentName,
+      </if>
+      <if test="energy != null">
+        energy,
+      </if>
+      <if test="money != null">
+        money,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="studentid != null">
+        #{studentid,jdbcType=INTEGER},
+      </if>
+      <if test="studentname != null">
+        #{studentname,jdbcType=VARCHAR},
+      </if>
+      <if test="energy != null">
+        #{energy,jdbcType=INTEGER},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ydlab.interchoice.domain.NumExample" resultType="java.lang.Long">
+    select count(*) from num
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update num
+    <set>
+      <if test="record.studentid != null">
+        studentId = #{record.studentid,jdbcType=INTEGER},
+      </if>
+      <if test="record.studentname != null">
+        studentName = #{record.studentname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.energy != null">
+        energy = #{record.energy,jdbcType=INTEGER},
+      </if>
+      <if test="record.money != null">
+        money = #{record.money,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update num
+    set studentId = #{record.studentid,jdbcType=INTEGER},
+      studentName = #{record.studentname,jdbcType=VARCHAR},
+      energy = #{record.energy,jdbcType=INTEGER},
+      money = #{record.money,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ydlab.interchoice.domain.Num">
+    update num
+    <set>
+      <if test="studentname != null">
+        studentName = #{studentname,jdbcType=VARCHAR},
+      </if>
+      <if test="energy != null">
+        energy = #{energy,jdbcType=INTEGER},
+      </if>
+      <if test="money != null">
+        money = #{money,jdbcType=INTEGER},
+      </if>
+    </set>
+    where studentId = #{studentid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ydlab.interchoice.domain.Num">
+    update num
+    set studentName = #{studentname,jdbcType=VARCHAR},
+      energy = #{energy,jdbcType=INTEGER},
+      money = #{money,jdbcType=INTEGER}
+    where studentId = #{studentid,jdbcType=INTEGER}
+  </update>
+</mapper>
