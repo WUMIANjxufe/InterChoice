@@ -73,10 +73,19 @@ public class UserController {
         return resp;
     }
     @ResponseBody
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public CommonResp update(ChooseReq  req){
+    @RequestMapping(value = "/getTutorName", method = RequestMethod.GET)
+    public CommonResp getTutorName(Integer studentid){
+        System.out.println("studentid"+studentid);
         CommonResp resp = new CommonResp<>();
-        String message = chooseService.updateTeacher(req).getMessage();
+        String message = chooseService.getTutorName(studentid).getMessage();
+        resp.setMessage(message);
+        return resp;
+    }
+    @ResponseBody
+    @RequestMapping(value = "/cancel", method = RequestMethod.POST)
+    public CommonResp update(Integer studentid){
+        CommonResp resp = new CommonResp<>();
+        String message = chooseService.cancelTeacher(studentid).getMessage();
         resp.setMessage(message);
         return resp;
     }

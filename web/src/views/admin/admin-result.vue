@@ -24,16 +24,11 @@
           <a-menu-item key="choice">
             <router-link to="/admin/ahp">推荐权重设置</router-link>
           </a-menu-item>
-          <a-menu-item key="teacher" disabled = ture>
+          <a-menu-item key="teacher" >
             <router-link to="/admin/choice">选择导师</router-link>
           </a-menu-item >
-          <a-menu-item key="4" disabled = ture>初选结果</a-menu-item>
-          <a-menu-item key="4" disabled = ture>初选结果</a-menu-item>
-          <a-menu-item key="4" disabled = ture>初选结果</a-menu-item>
-          <a-menu-item key="4" disabled = ture>初选结果</a-menu-item>
-          <a-menu-item key="4" disabled = ture>初选结果</a-menu-item>
-          <a-menu-item key="4" disabled = ture>初选结果</a-menu-item>
-          <a-menu-item key="4" disabled = ture>初选结果</a-menu-item>
+          <a-menu-item key="4">初选结果</a-menu-item>
+
 
         </a-sub-menu>
       </a-menu>

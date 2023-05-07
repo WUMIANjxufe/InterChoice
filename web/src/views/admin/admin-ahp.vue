@@ -15,7 +15,7 @@
                    实验流程
                 </span>
           </template>
-          <a-menu-item key="begin">
+          <a-menu-item key="begin" >
             <router-link to="/admin/begin">开场</router-link>
           </a-menu-item>
           <a-menu-item key="information">
@@ -24,10 +24,10 @@
           <a-menu-item key="choice">
             <router-link to="/admin/ahp">推荐权重设置</router-link>
           </a-menu-item>
-          <a-menu-item key="teacher">
+          <a-menu-item key="teacher" disabled = ture>
             <router-link to="/admin/choice">选择导师</router-link>
           </a-menu-item>
-          <a-menu-item key="4">初选结果</a-menu-item>
+          <a-menu-item key="4"  disabled = ture>初选结果</a-menu-item>
         </a-sub-menu>
       </a-menu>
     </a-layout-sider>
@@ -49,6 +49,7 @@ import {defineComponent, h, onMounted, reactive, ref, toRefs} from 'vue';
 import axios from "axios";
 import {Modal} from "ant-design-vue";
 import AHP from "@/assets/img/AHP.png"
+import router from "@/router";
 const columns = [
   {
     title: '姓名',
@@ -153,6 +154,9 @@ export default defineComponent({
     const onOpenChange = (openKeys) => {
       state.openKeys = openKeys;
     };
+    const handleModalOk = ()=>{
+      router.push('/admin/choice')
+    }
     const info = () => {
       Modal.info({
         style:"width:1000px",
@@ -166,6 +170,7 @@ export default defineComponent({
       });
     };
     return {
+      handleModalOk,
       info,
       ...toRefs(state),
       modalvisible,

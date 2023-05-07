@@ -18,23 +18,16 @@
           <a-menu-item key="begin">
             <router-link to="/admin/begin">开场</router-link>
           </a-menu-item>
-          <a-menu-item key="information">
+          <a-menu-item key="information" disabled = ture>
             <router-link to="/admin/information">填写简历</router-link>
           </a-menu-item>
-          <a-menu-item key="choice">
+          <a-menu-item key="choice" disabled = ture>
             <router-link to="/admin/ahp">推荐权重设置</router-link>
           </a-menu-item>
           <a-menu-item key="teacher" disabled = ture>
             <router-link to="/admin/choice">选择导师</router-link>
           </a-menu-item >
           <a-menu-item key="4" disabled = ture>初选结果</a-menu-item>
-          <a-menu-item key="4" disabled = ture>初选结果</a-menu-item>
-          <a-menu-item key="4" disabled = ture>初选结果</a-menu-item>
-          <a-menu-item key="4" disabled = ture>初选结果</a-menu-item>
-          <a-menu-item key="4" disabled = ture>初选结果</a-menu-item>
-          <a-menu-item key="4" disabled = ture>初选结果</a-menu-item>
-          <a-menu-item key="4" disabled = ture>初选结果</a-menu-item>
-
         </a-sub-menu>
       </a-menu>
     </a-layout-sider>

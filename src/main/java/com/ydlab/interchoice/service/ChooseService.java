@@ -29,6 +29,12 @@ public class ChooseService {
         }
         return commonResp;
     }
+    public CommonResp getTutorName(Integer studentid){
+        System.out.println("rerere"+studentid);
+        CommonResp commonResp = new CommonResp();
+        commonResp.setMessage( chooseMapper.selectByPrimaryKey(studentid).getTutorname());
+        return commonResp;
+    }
     public CommonResp updateTeacher(ChooseReq req){
         CommonResp commonResp = new CommonResp();
         Choose user = CopyUtil.copy(req, Choose.class);
@@ -39,6 +45,18 @@ public class ChooseService {
         }else{
             commonResp.setMessage("选择成功");
             chooseMapper.insert(user);
+        }
+        return commonResp;
+    }
+    public CommonResp cancelTeacher(Integer studentid) {
+        CommonResp commonResp = new CommonResp();
+        System.out.println("cancelreq" + studentid);
+        System.out.println("ddd"+chooseMapper.deleteByPrimaryKey(studentid));
+        if (chooseMapper.deleteByPrimaryKey(studentid) != 0) {
+            System.out.println("取消成功");
+            commonResp.setMessage("取消成功");
+        } else {
+            commonResp.setMessage("还未选择导师");
         }
         return commonResp;
     }

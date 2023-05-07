@@ -27,7 +27,7 @@
           <a-menu-item key="teacher">
             <router-link to="/admin/choice">选择导师</router-link>
           </a-menu-item>
-          <a-menu-item key="4">初选结果</a-menu-item>
+          <a-menu-item key="4"  disabled = ture>初选结果</a-menu-item>
         </a-sub-menu>
       </a-menu>
     </a-layout-sider>
@@ -43,11 +43,13 @@
             style="width: 100%">
           <template v-slot:action="{record}">
           <a-space size="small">
-            <a-button type="primary"  @click="choose(record)">选择</a-button>
-            <a-button type="primary">取消选择</a-button>
+            <a @click="choose(record)">选择{{ record.tutorname }}</a>
+            <a-divider type="vertical" />
+            <a>查看详情</a>
           </a-space>
           </template>
         </a-table>
+        <a-button type="primary" @click="cancel">取消预选导师</a-button>
       </a-modal>
     </a-layout-content>
   </a-layout>
@@ -124,6 +126,7 @@ export default defineComponent({
   setup() {
     const user = computed(()=> store.state.user);
     const data = ref();
+    const tutorName = ref();
     axios.get("/choice/tutorList").then((res) => {
       console.log(res.data.content)
       data.value = res.data.content;
@@ -155,8 +158,16 @@ export default defineComponent({
       console.log(user.value.studentName)
       const data = Qs.stringify({"studentname": user.value.studentName,"studentid": user.value.studentId,"tutorid": record.tutorid, "tutorname": record.tutorname});
       axios.post("/choose",data).then((res => {
-         console.log(res.data.message);
-         message.info(res.data.message);
+         axios.get("/getTutorName",{params:{studentid:user.value.studentId}}).then(((res =>{
+           console.log("111111111111");
+           tutorName.value = res.data.message
+           console.log(res.data.message);
+           console.log(tutorName.value);
+           if(tutorName.value!=null){
+             message.info("已选择"+tutorName.value);
+           }
+         })))
+           console.log(res.data.message);
       }))
     }
     // const update = () => {
@@ -164,8 +175,16 @@ export default defineComponent({
     //     console.log(res.data)
     //   }))
     // }
-
+    const cancel = () =>{
+      const data1 = Qs.stringify({"studentid": user.value.studentId});
+         axios.post("/cancel",data1).then((res =>{
+           console.log(res.data.message);
+           message.info(res.data.message);
+         }))
+    }
     return {
+      cancel,
+      tutorName,
       handleModalOk,
       ...toRefs(state),
       modalVisible,
