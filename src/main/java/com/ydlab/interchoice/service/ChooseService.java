@@ -52,7 +52,7 @@ public class ChooseService {
         CommonResp commonResp = new CommonResp();
         System.out.println("cancelreq" + studentid);
         System.out.println("ddd"+chooseMapper.deleteByPrimaryKey(studentid));
-        if (chooseMapper.deleteByPrimaryKey(studentid) != 0) {
+        if (chooseMapper.deleteByPrimaryKey(studentid) != -1) {
             System.out.println("取消成功");
             commonResp.setMessage("取消成功");
         } else {

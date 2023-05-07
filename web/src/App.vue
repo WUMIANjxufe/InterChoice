@@ -1,5 +1,5 @@
 <template>
-  <a-layout>
+  <a-layout style="height: 100%;width: 100%">
   <TheHeader></TheHeader>
        <router-view/>
   <the-footer></the-footer>
@@ -23,7 +23,7 @@ export default defineComponent({
   width: 120px;
   height: 31px;
   margin: 16px 24px 16px 0;
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(100, 255, 255, 0.3);
 }
 
 .ant-row-rtl #components-layout-demo-top-side .logo {

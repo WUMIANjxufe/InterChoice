@@ -27,7 +27,12 @@
           <a-menu-item key="teacher">
             <router-link to="/admin/choice">选择导师</router-link>
           </a-menu-item>
-          <a-menu-item key="4"  disabled = ture>初选结果</a-menu-item>
+          <a-menu-item key="4"  disabled = ture>
+            <router-link to="/admin/result">初选结果</router-link>
+          </a-menu-item>
+          <a-menu-item key="4"  disabled = ture>
+            <router-link to="/admin/inspect">导师考察</router-link>
+          </a-menu-item>
         </a-sub-menu>
       </a-menu>
     </a-layout-sider>
@@ -35,7 +40,7 @@
       <p align="center">
         <video src="../../assets/video/3.mp4" id="video3" style="width:50%;height: auto" autoplay controls></video>
       </p>
-      <a-modal v-model:visible="modalVisible"  title="选择导师" @ok="handleModalOk" style="width: 80%">
+      <a-modal v-model:visible="modalVisible"  title="选择导师" @ok="handleModalOk" okText="投递简历" style="width: 80%">
         <a-table
             :columns="columns"
             :data-source="data"

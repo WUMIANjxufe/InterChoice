@@ -27,7 +27,12 @@
           <a-menu-item key="teacher" disabled = ture>
             <router-link to="/admin/choice">选择导师</router-link>
           </a-menu-item>
-          <a-menu-item key="4" disabled = ture>初选结果</a-menu-item>
+          <a-menu-item key="4"  disabled = ture>
+            <router-link to="/admin/result">初选结果</router-link>
+          </a-menu-item>
+          <a-menu-item key="4"  disabled = ture>
+            <router-link to="/admin/inspect">导师考察</router-link>
+          </a-menu-item>
         </a-sub-menu>
       </a-menu>
     </a-layout-sider>

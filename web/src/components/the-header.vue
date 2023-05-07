@@ -7,9 +7,6 @@
         v-model:selectedKeys="selectedKeys1"
         :style="{ lineHeight: '64px' }"
     >
-<!--      <a-menu-item key="1">-->
-<!--        <router-link to="/">实验</router-link>-->
-<!--      </a-menu-item>-->
     </a-menu>
     <a-popconfirm
     title="确定退出？"
@@ -23,6 +20,12 @@
     </a-popconfirm>
     <a class="login-menu" v-show="user.studentId">
     <span>您好：{{user.studentName}}</span>
+    </a>
+    <a class="login-menu">
+      <span>金钱值为：</span>
+    </a>
+    <a class="login-menu">
+      <span>精力值为：</span>
     </a>
   </a-layout-header>
 </template>

@@ -8,6 +8,7 @@ import AdminBegin from "@/views/admin/admin-begin.vue";
 import AdminChoice from "@/views/admin/admin-choice.vue";
 import AdminAhp from "@/views/admin/admin-ahp.vue";
 import AdminResult from "@/views/admin/admin-result.vue";
+import AdminInspect from "@/views/admin/admin-inspect.vue";
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/home',
@@ -61,6 +62,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/admin/choice',
     name: 'AdminChoice',
     component: AdminChoice
+  },
+  {
+    path: '/admin/inspect',
+    name: 'AdminInspect',
+    component: AdminInspect
   }
 ]
 
