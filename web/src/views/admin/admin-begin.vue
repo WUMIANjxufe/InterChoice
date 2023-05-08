@@ -36,9 +36,9 @@
         </a-sub-menu>
       </a-menu>
     </a-layout-sider>
-    <a-layout-content :style="{ padding: '0 24px', minHeight: '280px' }">
+    <a-layout-content :style="{ padding: '24px 24px', minHeight: '180px' }">
       <p align="center">
-        <video src="../../assets/video/1.mp4" id="video1"  style="width:50%;height: auto" autoplay controls></video>
+        <video src="../../assets/video/1.mp4" id="video1"  style="width:60%;height: auto" autoplay controls></video>
       </p>
     </a-layout-content>
   </a-layout>

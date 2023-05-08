@@ -9,6 +9,8 @@ import AdminChoice from "@/views/admin/admin-choice.vue";
 import AdminAhp from "@/views/admin/admin-ahp.vue";
 import AdminResult from "@/views/admin/admin-result.vue";
 import AdminInspect from "@/views/admin/admin-inspect.vue";
+import store from "@/store";
+import {Tool} from "@/util/tool.ts";
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/home',
@@ -41,32 +43,50 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/admin/information',
     name: 'AdminInformation',
-    component: AdminInformation
+    component: AdminInformation,
+    meta:{
+      loginRequire: true
+    }
   },
   {
     path: '/admin/ahp',
     name: 'AdminAhp',
-    component: AdminAhp
+    component: AdminAhp,
+    meta:{
+      loginRequire: true
+    }
   },
   {
     path: '/admin/result',
     name: 'AdminResult',
-    component: AdminResult
+    component: AdminResult,
+    meta:{
+      loginRequire: true
+    }
   },
   {
     path: '/admin/begin',
     name: 'AdminBegin',
-    component: AdminBegin
+    component: AdminBegin,
+    meta:{
+      loginRequire: true
+    }
   },
   {
     path: '/admin/choice',
     name: 'AdminChoice',
-    component: AdminChoice
+    component: AdminChoice,
+    meta:{
+      loginRequire: true
+    }
   },
   {
     path: '/admin/inspect',
     name: 'AdminInspect',
-    component: AdminInspect
+    component: AdminInspect,
+    meta:{
+      loginRequire: true
+    }
   }
 ]
 
@@ -75,4 +95,24 @@ const router = createRouter({
   routes
 })
 
+// 路由登录拦截
+router.beforeEach((to, from, next) => {
+  // 要不要对meta.loginRequire属性做监控拦截
+  if (to.matched.some(function (item) {
+    console.log(item, "是否需要登录校验：", item.meta.loginRequire);
+    return item.meta.loginRequire
+  })) {
+    const loginUser = store.state.user;
+    if (Tool.isEmpty(loginUser)) {
+      console.log("用户未登录！");
+      next('/');
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
+});
+
 export default router
+

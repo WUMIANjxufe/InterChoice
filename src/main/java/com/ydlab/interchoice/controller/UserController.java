@@ -30,7 +30,7 @@ public class UserController {
     @Resource
     private SnowFlake snowFlake;
     @Resource
-    private RedisTemplate<Long, String> redisTemplate;
+    private RedisTemplate redisTemplate;
     @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public CommonResp<LoginResp> login(LoginReq req) {
@@ -40,9 +40,10 @@ public class UserController {
         LoginResp userLoginResp = loginService.login(req);
         System.out.println("userLoginResp"+userLoginResp);
         Long token = snowFlake.nextId();
+        String s2 = String.valueOf(token);
         LOG.info("生成单点登录token：{}，并放入redis中", token);
         userLoginResp.setToken(token.toString());
-        redisTemplate.opsForValue().set(token,JSONObject.toJSONString(userLoginResp), 3600 * 24, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set(token.toString(), JSONObject.toJSONString(userLoginResp), 3600 * 24, TimeUnit.SECONDS);
         resp.setContent(userLoginResp);
         System.out.println("content"+resp);
         return resp;

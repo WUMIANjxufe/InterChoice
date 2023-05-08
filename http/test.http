@@ -13,6 +13,6 @@ Accept: application/json
 
 
 ###
-GET http://localhost:8880/choice/tutorList
+GET http://localhost:8880/redis/get/310636339852873728
 
 POST http://localhost:8880/login?username=1&password=123
